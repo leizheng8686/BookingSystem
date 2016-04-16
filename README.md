@@ -1,6 +1,6 @@
 # Course Booking System
 ---
-Courses Booking System made with Swing, JDBC, MySql. This initial version has the following features:  
+Courses Booking System made with __Swing__, __JDBC__, __MySql__. This initial version has the following features:  
  
 - Login for students and admins.  
 - Students can add and drop courses.  
