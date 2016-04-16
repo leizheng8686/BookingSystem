@@ -14,3 +14,8 @@ The system is made using following Technologies:
 - Swing - For User Interface.  
 - JDBC - Java Database Connectivity.  
 - MySQL - Database.  
+  
+##Setup  
+
+##Product Show  
+
