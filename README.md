@@ -1,4 +1,4 @@
-# BookingSystem
+# Course Booking System
 ---
 Courses Booking System made with Swing, JDBC, MySql. This initial version has the following features:  
  
