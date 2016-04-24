@@ -1,13 +1,1 @@
-/connectDB.class
-/loginWindow.class
-/mainFrame.class
-/StuClient.class
-/adminClient.class
-/NewCourse.class
-/NewClass.class
-/NewStu.class
-/ChooseCourse.class
-/ChangePwd.class
-/DropCourse.class
-/CourseTable.class
-/emailNotice.class
+/StuClient$MyNode.class
