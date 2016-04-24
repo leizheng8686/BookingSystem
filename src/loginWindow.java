@@ -18,6 +18,8 @@ public class loginWindow extends JFrame implements ActionListener{
 	private ResultSet rs;
 	private JLabel imgl = new JLabel(new ImageIcon("C:\\Users\\86\\Documents\\GitHub\\learningJava\\courseSelection\\res\\Stevens_Statue.png"));
 	private JPanel jp=new JPanel();
+	private CardLayout cardLayout = new CardLayout();
+	private JPanel cardPanel = new JPanel(cardLayout);
 	private Container c = getContentPane();
 	private JLabel myTitle = new JLabel("SIT Course Selection System");
 	private JLabel jl1=new JLabel("Username");
@@ -34,7 +36,7 @@ public class loginWindow extends JFrame implements ActionListener{
 	//Buttons
 	private JButton jb1=new JButton("Sign in");
 	private JButton jb2=new JButton("Reset");
-	private JButton jb3=new JButton("Sign up");
+	private JButton jb3=new JButton("ForgotPWD");
 
 	public loginWindow()
 	{ 
@@ -68,7 +70,7 @@ public class loginWindow extends JFrame implements ActionListener{
 		//set LoginWin's buttons and labels
 		jp.setLayout(null);
 		jp.setBackground(Color.WHITE);
-		this.myTitle.setBounds(25, 5, w-10, 40);  //title
+		this.myTitle.setBounds(25, 5, 240, 40);  //title
 		myTitle.setForeground(Color.DARK_GRAY);
 		myTitle.setFont(new Font("Serif", Font.ITALIC, 20));
 		this.jp.add(myTitle);
@@ -91,14 +93,17 @@ public class loginWindow extends JFrame implements ActionListener{
 		this.jp.add(jrbArray[1]);
 		this.jb1.setBounds(40,140,200,30);   //Login
 		this.jp.add(jb1);
-		this.jb2.setBounds(150,180,90,25);  //Reset
+		this.jb2.setBounds(142,180,98,25);  //Reset
 		this.jp.add(jb2);
-		this.jb3.setBounds(40,180,90,25);   //Sign up
+		this.jb3.setBounds(40,180,98,25);   //ForgotPWD
 		this.jp.add(jb3);
 		this.add(jp);		
 		this.imgl.setBounds(15,40,250,140); //image
 		//this.jp.add(imgl);  
-		c.add(jp);
+		cardPanel.add(new SignUp(), "SignUp");
+		cardPanel.add(jp,"Login");
+		c.add(cardPanel,BorderLayout.CENTER);
+		cardLayout.show(cardPanel, "Login");
 	}
 	//define ActionListener
 	public void actionPerformed(ActionEvent e)
@@ -163,8 +168,8 @@ public class loginWindow extends JFrame implements ActionListener{
 			this.jpwf.setText("");
 		}
 		else if(e.getSource()==this.jb3){// Sign-up action
-			new SignUp();//create SignUp window
-			this.dispose();//close Login window
+			cardLayout.show(cardPanel, "SignUp");//create SignUp window
+			//this.dispose();//close Login window
 		}
 		else if(e.getSource()==jtf){// type in User name and press "Enter"
 			this.jpwf.requestFocus(true);
