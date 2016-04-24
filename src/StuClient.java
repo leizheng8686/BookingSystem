@@ -6,5 +6,7 @@ import java.net.URL;
 
 //student client window
 public class StuClient extends JFrame{
-
+  StuClient(String ID){
+		
+	}
 }
