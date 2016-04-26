@@ -16,7 +16,7 @@ public class loginWindow extends JFrame implements ActionListener{
 	private Connection conn;
 	private Statement stmt;
 	private ResultSet rs;
-	private JLabel imgl = new JLabel(new ImageIcon("C:\\Users\\86\\Documents\\GitHub\\learningJava\\courseSelection\\res\\Stevens_Statue.png"));
+	//private JLabel imgl = new JLabel(new ImageIcon("C:\\Users\\86\\Documents\\GitHub\\learningJava\\courseSelection\\res\\Stevens_Statue.png"));
 	private JPanel jp=new JPanel();
 	private CardLayout cardLayout = new CardLayout();
 	private JPanel cardPanel = new JPanel(cardLayout);
@@ -98,7 +98,7 @@ public class loginWindow extends JFrame implements ActionListener{
 		this.jb3.setBounds(40,180,98,25);   //ForgotPWD
 		this.jp.add(jb3);
 		this.add(jp);		
-		this.imgl.setBounds(15,40,250,140); //image
+		//this.imgl.setBounds(15,40,250,140); //image
 		//this.jp.add(imgl);  
 		cardPanel.add(new SignUp(), "SignUp");
 		cardPanel.add(jp,"Login");
@@ -112,8 +112,8 @@ public class loginWindow extends JFrame implements ActionListener{
 		if(e.getSource()==this.jb1)
 		{
 			this.setTitle("Logging...");
-			String name=this.jtf.getText().trim();
-			if(name.equals("")){
+			String userID=this.jtf.getText().trim();
+			if(userID.equals("")){
 				JOptionPane.showMessageDialog(this,"Please type your username!","Error",
 				                               JOptionPane.ERROR_MESSAGE);
 				this.setTitle("WELCOME");return;
@@ -130,10 +130,10 @@ public class loginWindow extends JFrame implements ActionListener{
 				if(type==0){//Student
 				    //create SQL to check info in database
 					String sql="select * from user_stu where "+
-					"stu_id='"+name+"' and pwd='"+pwd+"'";
+					"stu_id='"+userID+"' and pwd='"+pwd+"'";
 					rs=stmt.executeQuery(sql);
 					if(rs.next()){
-						new StuClient(name);//create Student Client window
+						new StuClient(userID);//create Student Client window
 						this.dispose();//close Login window
 					}
 					else{//error warning
@@ -146,7 +146,7 @@ public class loginWindow extends JFrame implements ActionListener{
 				else{//Admin
 					//create SQL to check info in database
 					String sql="select coll_id from user_teacher where "+
-					             "uid='"+name+"' and pwd='"+pwd+"'";
+					             "uid='"+userID+"' and pwd='"+pwd+"'";
 					rs=stmt.executeQuery(sql);
 					if(rs.next()){
 						String coll_id=rs.getString(1);
