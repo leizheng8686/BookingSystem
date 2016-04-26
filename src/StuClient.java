@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.SpringLayout;
 import java.net.URL;
 
 //student client window
@@ -12,18 +13,15 @@ public class StuClient extends JFrame{
 	private int height = screenSize.height/2;
 
 	private Container c = getContentPane();  
+	//setPreferredSize(new Dimension(725,50));
 	// TabbedPane and items
 	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.LEFT,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
-	private JPanel courseTable_jp = new JPanel();
+	private CourseTable courseTable_jp = new CourseTable();
 	private JPanel addCourse_jp = new JPanel();
 	private JPanel dropCourse_jp = new JPanel();
 	private JPanel grades_jp = new JPanel();
-	private JScrollPane courseTable_jsp = new JScrollPane(courseTable_jp);
-	private JLabel jl_addCourse = new JLabel();
-	private JLabel jl_dropCourse = new JLabel();
-	private JLabel jl_coursetable = new JLabel();
-	private JLabel jl_grades = new JLabel();
+	private JScrollPane courseTable_jsp = new JScrollPane();
 
 	//Buttons
 //	private JButton addCourse;
@@ -34,7 +32,8 @@ public class StuClient extends JFrame{
 	// Menu and items
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu = new JMenu("Menu");
-	private JMenuItem menuItem = new JMenuItem("Setting");
+	private JMenuItem setting = new JMenuItem("Setting");
+	private JMenuItem signout = new JMenuItem("Sign Out");
 	
 	StuClient(String ID){
 		//initialize window title and size
@@ -43,7 +42,10 @@ public class StuClient extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int centerX=screenSize.width/2;
 		int centerY=screenSize.height/2;
-		this.setBounds(centerX-width/2,centerY-height/2-100,width,height);
+		this.setLocation(centerX-width/2,centerY-height/2-100);
+		this.setSize(new Dimension(800,600));
+		tabbedPane_main.setBackground(Color.WHITE);
+
 		
 		//initialize frame
 		setMenu();
@@ -54,19 +56,26 @@ public class StuClient extends JFrame{
 	private void setMenu(){
 		setJMenuBar(menuBar);
 		menuBar.add(menu);
-		menu.add(menuItem);
+		menu.add(setting);
+		menu.add(signout);
 	}
 	
 	private void setMainFrame(){
-		tabbedPane_main.addTab("Course Table", courseTable_jsp);
-		tabbedPane_main.addTab("Add Course", jl_addCourse);
-		tabbedPane_main.addTab("Drop Course", jl_dropCourse);
-		tabbedPane_main.addTab("Grades", jl_grades);
+		tabbedPane_main.addTab("Course Table", courseTable_jp);
+		tabbedPane_main.addTab("Add Course", addCourse_jp);
+		tabbedPane_main.addTab("Drop Course", dropCourse_jp);
+		tabbedPane_main.addTab("Grades", grades_jp);
+
 		c.add(tabbedPane_main);
+		
 	}
 	
 	public void addListener(){
-		menuItem.addActionListener(new menuActionListener());
+		//Menu items
+		setting.addActionListener(new menuActionListener());
+		signout.addActionListener(new menuActionListener());
+		
+		
 	}
 	
 	public class menuActionListener implements ActionListener{
