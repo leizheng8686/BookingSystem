@@ -15,8 +15,9 @@ public class StuClient extends JFrame{
 	private Container c = getContentPane();  
 	//setPreferredSize(new Dimension(725,50));
 	// TabbedPane and items
-	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.LEFT,JTabbedPane.SCROLL_TAB_LAYOUT);
+	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
+	private StuInfo stuInfo_jp = new StuInfo();
 	private CourseTable courseTable_jp = new CourseTable();
 	private JPanel addCourse_jp = new JPanel();
 	private JPanel dropCourse_jp = new JPanel();
@@ -61,6 +62,7 @@ public class StuClient extends JFrame{
 	}
 	
 	private void setMainFrame(){
+		tabbedPane_main.addTab("Personal Information", stuInfo_jp);
 		tabbedPane_main.addTab("Course Table", courseTable_jp);
 		tabbedPane_main.addTab("Add Course", addCourse_jp);
 		tabbedPane_main.addTab("Drop Course", dropCourse_jp);

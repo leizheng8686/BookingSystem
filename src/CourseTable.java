@@ -10,6 +10,8 @@ public class CourseTable extends JPanel{
 	public void setup(){
 	//course table
 			SpringLayout table_jsl = new SpringLayout();
+			this.setLayout(table_jsl);
+			this.setBackground(Color.WHITE);
 			//basic info
 			JLabel StuName_jl = new JLabel("Student Name: ");           //JLabel Student Name
 			JLabel stuName_jl = new JLabel("Lei Zheng");
@@ -23,9 +25,8 @@ public class CourseTable extends JPanel{
 			JLabel currentTerm_jl = new JLabel("2016 Fall");
 			CurrentTerm_jl.setFont(new Font("Serif", Font.BOLD, 14));
 			currentTerm_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
+			
 			//set gap size between labels
-			this.setBackground(Color.WHITE);
-			this.setLayout(table_jsl);
 			this.add(StuName_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, StuName_jl, 10, SpringLayout.NORTH, this);
 			table_jsl.putConstraint(SpringLayout.WEST, StuName_jl, 20, SpringLayout.WEST, this);
@@ -48,6 +49,7 @@ public class CourseTable extends JPanel{
 			table_jsl.putConstraint(SpringLayout.NORTH, currentTerm_jl, 10, SpringLayout.NORTH, this);
 			table_jsl.putConstraint(SpringLayout.WEST, currentTerm_jl, 10, SpringLayout.EAST, CurrentTerm_jl);
 			table_jsl.putConstraint(SpringLayout.EAST, currentTerm_jl, termMargin, SpringLayout.EAST, this);
+			
 			
 	}
 }
