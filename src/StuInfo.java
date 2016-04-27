@@ -20,10 +20,10 @@ public class StuInfo extends JPanel{
 			JLabel stuID_jl = new JLabel("xxxxxxx");
 			StuID_jl.setFont(new Font("Serif", Font.BOLD, 14));
 			stuID_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Sex_jl = new JLabel("Sex:  ");						//JLabel Sex
-			JLabel sex_jl = new JLabel("xxxxxxxx");
-			Sex_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			sex_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
+			JLabel Gender_jl = new JLabel("Gender:  ");						//JLabel Gender
+			JLabel gender_jl = new JLabel("xxxxxxxx");
+			Gender_jl.setFont(new Font("Serif", Font.BOLD, 14));
+			gender_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
 			JLabel Nation_jl = new JLabel("Nationality:  ");			//JLabel Nationality
 			JLabel nation_jl = new JLabel("xxxxxxx");
 			Nation_jl.setFont(new Font("Serif", Font.BOLD, 14));
@@ -32,7 +32,7 @@ public class StuInfo extends JPanel{
 			JLabel birth_jl = new JLabel("xxxxxxx");
 			Birth_jl.setFont(new Font("Serif", Font.BOLD, 14));
 			birth_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel splitline = new JLabel("------------------------------------------"); //JLabel split line
+			JLabel splitline = new JLabel("------------------------------------------------------------------------------------"); //JLabel split line
 			JLabel Major_jl = new JLabel("Major:  ");						//JLabel Major
 			JLabel major_jl = new JLabel("xxxxxxxx");
 			Major_jl.setFont(new Font("Serif", Font.BOLD, 14));
@@ -64,17 +64,17 @@ public class StuInfo extends JPanel{
 			this.add(stuID_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, stuID_jl, 10, SpringLayout.SOUTH, StuName_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, stuID_jl, 10, SpringLayout.EAST, StuID_jl);
-			this.add(Sex_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, Sex_jl, 10, SpringLayout.SOUTH, StuID_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, Sex_jl, 20, SpringLayout.WEST, this);
-			this.add(sex_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, sex_jl, 10, SpringLayout.SOUTH, StuID_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, sex_jl, 10, SpringLayout.EAST, Sex_jl);
+			this.add(Gender_jl);
+			table_jsl.putConstraint(SpringLayout.NORTH, Gender_jl, 10, SpringLayout.SOUTH, StuID_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, Gender_jl, 20, SpringLayout.WEST, this);
+			this.add(gender_jl);
+			table_jsl.putConstraint(SpringLayout.NORTH, gender_jl, 10, SpringLayout.SOUTH, StuID_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, gender_jl, 10, SpringLayout.EAST, Gender_jl);
 			this.add(Nation_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, Nation_jl, 10, SpringLayout.SOUTH, Sex_jl);
+			table_jsl.putConstraint(SpringLayout.NORTH, Nation_jl, 10, SpringLayout.SOUTH, Gender_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, Nation_jl, 20, SpringLayout.WEST, this);
 			this.add(nation_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, nation_jl, 10, SpringLayout.SOUTH, Sex_jl);
+			table_jsl.putConstraint(SpringLayout.NORTH, nation_jl, 10, SpringLayout.SOUTH, Gender_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, nation_jl, 10, SpringLayout.EAST, Nation_jl);
 			this.add(Birth_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, Birth_jl, 10, SpringLayout.SOUTH, Nation_jl);

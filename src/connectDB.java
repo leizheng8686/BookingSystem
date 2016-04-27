@@ -26,7 +26,7 @@ public class connectDB {
 				e.printStackTrace();
 			}
 		}
-		public void closeConn()
+	public void closeConn()
 		{
 			try
 			{

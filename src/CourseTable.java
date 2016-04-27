@@ -26,7 +26,7 @@ public class CourseTable extends JPanel{
 			CurrentTerm_jl.setFont(new Font("Serif", Font.BOLD, 14));
 			currentTerm_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
 			
-			//set gap size between labels
+			//set gap size between basic info labels
 			this.add(StuName_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, StuName_jl, 10, SpringLayout.NORTH, this);
 			table_jsl.putConstraint(SpringLayout.WEST, StuName_jl, 20, SpringLayout.WEST, this);
