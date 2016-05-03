@@ -1,4 +1,6 @@
-use test;
+
+create database courseBooking;
+use courseBooking;
 /*
 drop table grade;
 drop table user_teacher;
@@ -20,107 +22,99 @@ deptID char(4) primary key,collID char(2) not null,deptName varchar(60),
 constraint dept_fk foreign key(collID) references college(collID)
 );
 
-#create table class(
-class_id char(6) primary key,dept_id char(4) not null,coll_id char(2),
-class_name varchar(6) not null,
-constraint class_fk1 foreign key(dept_id) references dept(dept_id),
-constraint class_fk2 foreign key(coll_id) references college(coll_id)
+
+create table major(
+majorID char(6) primary key, deptID char(4), collID char(2) not null,
+majorName varchar(60) not null,
+constraint class_fk1 foreign key(deptID) references dept(deptID),
+constraint class_fk2 foreign key(collID) references college(collID)
 );
 
+
 create table student(
-stuID char(12) primary key,stuName varchar(20) not null,stuGender char(6) 
-check(stuGender='Male' or stuGender='Female'),stuBirth date,
-nationality varchar(30),collID char(2) not null,deptID char(4) not null,
+stuID char(12) primary key,firstame varchar(20) not null,middlename varchar(20),lastname varchar(20) not null, 
+stuGender char(6) check(stuGender='Male' or stuGender='Female'),
+stuBirth date,nationality varchar(15),
+collID char(2) not null,deptID char(4), majorID char(6) not null,
 enrollTime date not null, graduateTime date,
 constraint stu_fk1 foreign key(deptID) references dept(deptID),
-constraint stu_fk2 foreign key(collID) references college(collID)
+constraint stu_fk2 foreign key(collID) references college(collID),
+constraint stu_fk3 foreign key(majorID) references major(majorID)
 );
 
 create table course(
-courseID char(8) primary key,courseName varchar(30) not null,credits numeric(3,1) not null,
-collID char(2) not null,deptID char(4) not null,
+courseID char(8) primary key,courseName varchar(50) not null,credit numeric(3,1) not null,
+collID char(2) not null, deptID char(4), majorID char(6) not null,
 constraint cou_fk1 foreign key(deptID) references dept(deptID),
-constraint cou_fk2 foreign key(collID) references college(collID)
+constraint cou_fk2 foreign key(collID) references college(collID),
+constraint cou_fk3 foreign key(majorID) references major(majorID)
 );
 
 create table courseinfo(
-courseID char(6),courseDay char(1),courseTime char(1),teacher varchar(20) not null,
-onchosing char(1) default '0',
-constraint couinfo_fk1 foreign key(cou_id) references course(cou_id),
-constraint couinfo_key primary key(cou_id,cou_day,cou_time)
+courseID char(8),courseDay char(1),courseTime char(1), location char(6), teacher varchar(20) not null,
+capacity tinyint unsigned default 30, restCapacity tinyint unsigned default 30,
+description varchar(1000),
+constraint couinfo_fk1 foreign key(courseID) references course(courseID),
+constraint couinfo_key primary key(courseID,courseDay,courseTime,location)
 );
 
 create table grade(
-stu_id char(12),cou_id char(6),score numeric(4,1) default 0,isdual numeric(1) default 0,
-constraint grade_fk1 foreign key(cou_id) references course(cou_id),
-constraint grade_fk2 foreign key(stu_id) references student(stu_id),
-constraint grade_key primary key(stu_id,cou_id)
+stuID char(12),courseID char(8),grade tinyint unsigned default 0, credit numeric(4,1) default 0,
+constraint grade_fk1 foreign key(courseID) references course(courseID),
+constraint grade_fk2 foreign key(stuID) references student(stuID),
+constraint grade_key primary key(stuID,courseID)
 );
 
-create table user_teacher(
-uid char(6) primary key,
-pwd char(12) not null,
-coll_id char(2) not null,
-constraint user1_fk foreign key(coll_id) references college(coll_id)
+create table user_admin(
+ID char(12) primary key,
+PWD char(15) not null
 );
 
 create table user_stu(
-stu_id char(12) primary key,
-pwd char(12) not null,
-constraint user2_fk foreign key(stu_id) references student(stu_id)
+stuID char(12) primary key,
+PWD char(15) not null,
+constraint user2_fk foreign key(stuID) references student(stuID)
 );
 
-insert into college values('01','计控学院');
-insert into college values('02','机械学院');
+insert into college values('01','School of Engineering & Science');
+insert into college values('02','School of Business');
+insert into college values('03','School of Systems & Enterprises');
+insert into college values('04','College of Arts and Letters');
 
-insert into dept values('0101','01','自动化专业');
-insert into dept values('0102','01','仪表专业');
-insert into dept values('0103','01','计算机专业');
+insert into dept values('0101','01','Computer Science');
+insert into dept values('0102','01','Chemical Engineering & Materials Science');
+insert into dept values('0103','01','Civil, Environmental & Ocean Engineering');
+insert into dept values('0104','01','Electrical & Computer Engineering');
+insert into dept values('0105','01','Mathematical Sciences');
+insert into dept values('0106','01','Physics & Engineering Physics');
 
-insert into dept values('0201','02','机械设计专业');
-insert into dept values('0202','02','工业工程专业');
-insert into dept values('0203','02','机械制造专业');
+insert into major values('010401', '0104', '01','Electrical Engineering');
+insert into major values('010402', '0104', '01','Computer Engineering');
+insert into major values('010403', '0104', '01','Information and Data Engineering');
+insert into major values('010101', '0101', '01','Computer Science');
 
-insert into class values('010101','0101','01','一班');
-insert into class values('010102','0101','01','二班');
-insert into class values('010201','0102','01','一班');
-insert into class values('010202','0102','01','二班');
-insert into class values('010301','0103','01','一班');
-insert into class values('010302','0103','01','二班');
-insert into class values('010303','0103','01','三班');
+insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010402','2015-9-1', '2017-5-15');
+#insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010303','2015-9-1');
 
+insert into user_stu values('10399614','10399614');
+#insert into user_stu values('200501030218','200501030218');
+#insert into user_stu values('200501020319','200501020319');
+#insert into user_stu values('200502020319','200502020319');
 
-insert into class values('020101','0201','01','一班');
-insert into class values('020102','0201','01','二班');
-insert into class values('020201','0202','01','一班');
-insert into class values('020202','0202','01','二班');
-insert into class values('020301','0203','01','一班');
-insert into class values('020302','0203','01','二班');
-insert into class values('020303','0203','01','三班');
+insert into user_admin values('Lei','123456');
+insert into user_admin values('Shengkai','123456');
 
+insert into course values('EE810J','Engineering Programming: Java', 3.0,'01','0104', '010401');
+insert into course values('EE810C','Engineering Programming: C++', 3.0,'01','0104', '010401');
+insert into course values('CPE593B','Applied Data Structures and Algorithms', 3.0,'01','0104', '010402');
+insert into course values('CPE695','Applied Machine Learning', 3.0,'01','0104', '010402');
+insert into course values('CS561B','Database Management Systems I', 3.0,'01','0101', '010101');
+insert into course values('CS555','Agile Methods for Software Developement', 3.0,'01','0101', '010101');
 
-insert into student values('200501030318','张三','男','1986-11-1','河北省沧州市','01','0103','010303','2005-9-1');
-insert into student values('200501030218','李四','男','1986-12-10','河北省唐山市','01','0103','010302','2005-9-1');
-insert into student values('200501020319','王五','男','1986-11-1','河北省石家庄市','01','0102','010303','2005-9-1');
-insert into student values('200502020319','赵六','男','1986-11-1','河北省石家庄市','02','0202','010303','2005-9-1');
-
-insert into user_stu values('200501030318','200501030318');
-insert into user_stu values('200501030218','200501030218');
-insert into user_stu values('200501020319','200501020319');
-insert into user_stu values('200502020319','200502020319');
-
-insert into user_teacher values('wyf','123456','01');
-insert into user_teacher values('cgq','123456','02');
-
-insert into course values('010301','计算机文化基础',2.5,'01','0103');
-insert into course values('010302','计算机导论',2,'01','0103');
-insert into course values('010303','汇编语言',3.5,'01','0103');
-insert into course values('010201','数字电路',2.5,'01','0102');
-insert into course values('010202','模拟电路',3.5,'01','0102');
-insert into course values('010101','自动化原理',3.5,'01','0101');
-
-insert into course values('020101','机械制图',3.5,'02','0201');
-insert into course values('020201','工业工程原理',3.5,'02','0202');
-insert into course values('020301','机械制造基础',3.5,'02','0203');
-insert into course values('020302','铸造技术',3.5,'02','0203');
+insert into courseinfo values('EE810J','1','3','X106', 'Dov Kruger', 30, 30, 'Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented,[13] and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere" (WORA),[14] meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.[15] Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of computer architecture.');
+insert into courseinfo values('EE810C','3','3','EE715', 'Dov Kruger ', 30, 30, 'Hello, I am an introduction.');
+insert into courseinfo values('CPE593B','2','3','M205', 'Dov Kruger', 30, 30, 'Hello, I am an introduction.');
+insert into courseinfo values('CPE695','3','4','BC210', 'Duan', 30, 30, 'Hello, I am an introduction.');
+insert into courseinfo values('CS561B','4','4','E222', 'Kim Samuel', 30, 30, 'Hello, I am an introduction.');
+insert into courseinfo values('CS555','3','3','BC304', 'Rowland James', 30, 30, 'Hello, I am an introduction.');
 

@@ -130,7 +130,7 @@ public class loginWindow extends JFrame implements ActionListener{
 				if(type==0){//Student
 				    //create SQL to check info in database
 					String sql="select * from user_stu where "+
-					"stu_id='"+userID+"' and pwd='"+pwd+"'";
+					"stuID='"+userID+"' and PWD='"+pwd+"'";
 					rs=stmt.executeQuery(sql);
 					if(rs.next()){
 						new StuClient(userID);//create Student Client window
@@ -167,8 +167,8 @@ public class loginWindow extends JFrame implements ActionListener{
 			this.jtf.setText("");
 			this.jpwf.setText("");
 		}
-		else if(e.getSource()==this.jb3){// Sign-up action
-			cardLayout.show(cardPanel, "SignUp");//create SignUp window
+		else if(e.getSource()==this.jb3){// forgotPWD action
+			cardLayout.show(cardPanel, "Forgot PWD");//create forgotPWD window
 			//this.dispose();//close Login window
 		}
 		else if(e.getSource()==jtf){// type in User name and press "Enter"
@@ -184,7 +184,7 @@ public class loginWindow extends JFrame implements ActionListener{
 		try
 		{//load JDBC driver, make Connection and Statement
 			Class.forName("com.mysql.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mysql://localhost"+"/test","root","");
+			conn=DriverManager.getConnection("jdbc:mysql://localhost"+"/courseBooking","root","");
 			stmt=conn.createStatement();
 		}
 		catch(SQLException e)

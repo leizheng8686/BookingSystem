@@ -2,16 +2,50 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import layout.SpringUtilities;
+
 //student courses table
 public class CourseTable extends JPanel{
 	CourseTable(){
-		setup();
+		makePanel();
 	}
-	public void setup(){
+	public void makePanel(){
 	//course table
 			SpringLayout table_jsl = new SpringLayout();
 			this.setLayout(table_jsl);
 			this.setBackground(Color.WHITE);
+			
+			int rows = 5;
+			int cols = 8;
+			for (int r = 0; r < rows; r++) {
+			    for (int c = 0; c < cols; c++) {
+			        JTextField textField =
+			                new JTextField(" ");
+			        textField.setEditable(false);
+			        textField.setBackground(new Color(0, 206, 209));
+			        textField.setHorizontalAlignment(JTextField.CENTER );
+			        this.add(textField);
+			    }
+			}
+			String weekdays[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+			String timeSection[] = {"9:00-11:30", "12:00-14:30", "15:00-17:30", "18:15-20:45"};
+			for(int c = 1; c < cols; c++){
+				JTextField j = (JTextField) getComponent(c);
+		        j.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 18));
+				j.setText(weekdays[c-1]);
+			}
+			for(int r = 1; r < rows; r++){
+				JTextField j = (JTextField) getComponent(cols*r);
+		        j.setFont(new Font("Helvetica", Font.ROMAN_BASELINE, 14));
+				j.setText(timeSection[r-1]);
+			}
+			
+			//Lay out the panel.
+			SpringUtilities.makeCompactGrid(this, //parent
+			                                rows, cols,
+			                                10, 60,  //initX, initY
+			                                3, 3); //xPad, yPad
+
 			//basic info
 			JLabel StuName_jl = new JLabel("Student Name: ");           //JLabel Student Name
 			JLabel stuName_jl = new JLabel("Lei Zheng");
@@ -25,6 +59,7 @@ public class CourseTable extends JPanel{
 			JLabel currentTerm_jl = new JLabel("2016 Fall");
 			CurrentTerm_jl.setFont(new Font("Serif", Font.BOLD, 14));
 			currentTerm_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
+			
 			
 			//set gap size between basic info labels
 			this.add(StuName_jl);
@@ -50,6 +85,8 @@ public class CourseTable extends JPanel{
 			table_jsl.putConstraint(SpringLayout.WEST, currentTerm_jl, 10, SpringLayout.EAST, CurrentTerm_jl);
 			table_jsl.putConstraint(SpringLayout.EAST, currentTerm_jl, termMargin, SpringLayout.EAST, this);
 			
+			
+
 			
 	}
 }

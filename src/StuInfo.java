@@ -52,36 +52,37 @@ public class StuInfo extends JPanel{
 			
 			
 			//set gap size between labels
+			int gap = 60;
 			this.add(StuName_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, StuName_jl, 10, SpringLayout.NORTH, this);
 			table_jsl.putConstraint(SpringLayout.WEST, StuName_jl, 20, SpringLayout.WEST, this);
 			this.add(stuName_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, stuName_jl, 10, SpringLayout.NORTH, this);
-			table_jsl.putConstraint(SpringLayout.WEST, stuName_jl, 10, SpringLayout.EAST, StuName_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, stuName_jl, gap, SpringLayout.EAST, StuName_jl);
 			this.add(StuID_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, StuID_jl, 10, SpringLayout.SOUTH, StuName_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, StuID_jl, 20, SpringLayout.WEST, this);
 			this.add(stuID_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, stuID_jl, 10, SpringLayout.SOUTH, StuName_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, stuID_jl, 10, SpringLayout.EAST, StuID_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, stuID_jl, 0, SpringLayout.WEST, stuName_jl);
 			this.add(Gender_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, Gender_jl, 10, SpringLayout.SOUTH, StuID_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, Gender_jl, 20, SpringLayout.WEST, this);
 			this.add(gender_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, gender_jl, 10, SpringLayout.SOUTH, StuID_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, gender_jl, 10, SpringLayout.EAST, Gender_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, gender_jl, 0, SpringLayout.WEST, stuName_jl);
 			this.add(Nation_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, Nation_jl, 10, SpringLayout.SOUTH, Gender_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, Nation_jl, 20, SpringLayout.WEST, this);
 			this.add(nation_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, nation_jl, 10, SpringLayout.SOUTH, Gender_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, nation_jl, 10, SpringLayout.EAST, Nation_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, nation_jl, 0, SpringLayout.WEST, stuName_jl);
 			this.add(Birth_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, Birth_jl, 10, SpringLayout.SOUTH, Nation_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, Birth_jl, 20, SpringLayout.WEST, this);
 			this.add(birth_jl);
 			table_jsl.putConstraint(SpringLayout.NORTH, birth_jl, 10, SpringLayout.SOUTH, Nation_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, birth_jl, 10, SpringLayout.EAST, Birth_jl);
+			table_jsl.putConstraint(SpringLayout.WEST, birth_jl, 0, SpringLayout.WEST, stuName_jl);
 			this.add(splitline);
 			table_jsl.putConstraint(SpringLayout.NORTH, splitline, 10, SpringLayout.SOUTH, Birth_jl);
 			table_jsl.putConstraint(SpringLayout.WEST, splitline, 20, SpringLayout.WEST, this);

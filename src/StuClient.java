@@ -19,10 +19,10 @@ public class StuClient extends JFrame{
 	//private JTextArea ta = new JTextArea(20,30);
 	private StuInfo stuInfo_jp = new StuInfo();
 	private CourseTable courseTable_jp = new CourseTable();
-	private JPanel addCourse_jp = new JPanel();
-	private JPanel dropCourse_jp = new JPanel();
-	private JPanel grades_jp = new JPanel();
-	private JScrollPane courseTable_jsp = new JScrollPane();
+	private ChooseCourse addCourse_jp = new ChooseCourse();
+	private DropCourse dropCourse_jp = new DropCourse();
+	private StuGrades grades_jp = new StuGrades();
+	//private JScrollPane courseTable_jsp = new JScrollPane();
 
 	//Buttons
 //	private JButton addCourse;
@@ -63,10 +63,10 @@ public class StuClient extends JFrame{
 	
 	private void setMainFrame(){
 		tabbedPane_main.addTab("Personal Information", stuInfo_jp);
-		tabbedPane_main.addTab("Course Table", courseTable_jp);
-		tabbedPane_main.addTab("Add Course", addCourse_jp);
-		tabbedPane_main.addTab("Drop Course", dropCourse_jp);
-		tabbedPane_main.addTab("Grades", grades_jp);
+		tabbedPane_main.addTab("    Course Table    ", courseTable_jp);
+		tabbedPane_main.addTab("     Add Course     ", addCourse_jp);
+		tabbedPane_main.addTab("    Drop Course     ", dropCourse_jp);
+		tabbedPane_main.addTab("       Grades       ", grades_jp);
 
 		c.add(tabbedPane_main);
 		
@@ -88,6 +88,6 @@ public class StuClient extends JFrame{
 	
 	
 	public static void main(String[] arg){
-		new StuClient("123456789");
+		//new StuClient("123456789");
 	}
 }

@@ -14,7 +14,7 @@ public class connectDB {
 			try
 			{//load JDBC driver, make Connection and Statement
 				Class.forName("com.mysql.jdbc.Driver");
-				conn=DriverManager.getConnection("jdbc:mysql://"+host+"/test","root","");
+				conn=DriverManager.getConnection("jdbc:mysql://"+host+"/courseBooking","root","");
 				stmt=conn.createStatement();
 			}
 			catch(SQLException e)
