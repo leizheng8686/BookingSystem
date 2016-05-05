@@ -7,6 +7,9 @@ import java.net.URL;
 
 //student client window
 public class StuClient extends JFrame{
+	
+	private String host;
+	private String stuID;
 	//window size variable
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = screenSize.width/2;
@@ -19,7 +22,7 @@ public class StuClient extends JFrame{
 	//private JTextArea ta = new JTextArea(20,30);
 	private StuInfo stuInfo_jp = new StuInfo();
 	private CourseTable courseTable_jp = new CourseTable();
-	private ChooseCourse addCourse_jp = new ChooseCourse();
+	private ChooseCourse addCourse_jp = new ChooseCourse(stuID);
 	private DropCourse dropCourse_jp = new DropCourse();
 	private StuGrades grades_jp = new StuGrades();
 	//private JScrollPane courseTable_jsp = new JScrollPane();
@@ -88,6 +91,6 @@ public class StuClient extends JFrame{
 	
 	
 	public static void main(String[] arg){
-		//new StuClient("123456789");
+		new StuClient("123456789");
 	}
 }

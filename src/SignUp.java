@@ -74,7 +74,6 @@ public class SignUp extends JPanel implements ActionListener{
 			}
 			try{
 				connectDB cdb = new connectDB();
-				cdb.connect();
 				    //create SQL to check info in database
 					String sql="select * from user_stu where "+
 					"stu_id='"+name;

@@ -5,10 +5,13 @@ import javax.swing.*;
 //drop course
 public class DropCourse extends JPanel{
 	
+	private String host;
+	private String stuID;
+	
 	JLabel currentCourses = new JLabel("Your Current Course:");
 	JTable course = new JTable();
 	
-	DropCourse(){
+	public DropCourse(){
 		
 	}
 	

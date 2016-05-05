@@ -5,12 +5,12 @@ import java.util.*;
 //define actionMethod to MySQL
 public class connectDB {
 	String host = "localhost";
-	private Connection conn;
-	private Statement stmt;
-	private ResultSet rs;
+	public Connection conn;
+	public Statement stmt;
+	public ResultSet rs;
 		
 	//connect to local MySQL database
-	public void connect(){
+	public connectDB(){
 			try
 			{//load JDBC driver, make Connection and Statement
 				Class.forName("com.mysql.jdbc.Driver");

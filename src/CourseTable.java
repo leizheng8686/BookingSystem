@@ -6,7 +6,11 @@ import layout.SpringUtilities;
 
 //student courses table
 public class CourseTable extends JPanel{
-	CourseTable(){
+	
+	private String host;
+	private String stuID;
+	
+	public CourseTable(){
 		makePanel();
 	}
 	public void makePanel(){
