@@ -145,12 +145,11 @@ public class loginWindow extends JFrame implements ActionListener{
 				}
 				else{//Admin
 					//create SQL to check info in database
-					String sql="select coll_id from user_teacher where "+
-					             "uid='"+userID+"' and pwd='"+pwd+"'";
+					String sql="select * from user_admin where "+
+					             "adminID='"+userID+"' and PWD='"+pwd+"'";
 					rs=stmt.executeQuery(sql);
 					if(rs.next()){
-						String coll_id=rs.getString(1);
-						new adminClient(coll_id);//create Admin Client window
+						new adminClient(userID);//create Admin Client window
 						this.dispose();//close Login window
 					}
 					else{//error warning
