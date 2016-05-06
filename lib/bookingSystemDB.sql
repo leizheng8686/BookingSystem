@@ -76,7 +76,7 @@ constraint grade_key primary key(stuID,courseID)
 );
 
 create table user_admin(
-ID char(12) primary key,
+adminID char(12) primary key,
 PWD char(15) not null
 );
 

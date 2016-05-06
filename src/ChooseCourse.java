@@ -188,6 +188,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 				dept_jcb.addItem("All");
 				String sql = "select collID from college where collName='"+coll_jcb.getSelectedItem()+"'";
 				conn.rs = conn.stmt.executeQuery(sql);
+				conn.rs.next();
 				String collID = conn.rs.getString(1);
 				sql = "select distinct deptName from dept where collID='"+collID+"'";
 				conn.rs = conn.stmt.executeQuery(sql);
@@ -218,6 +219,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 							major_jcb.addItem("All");
 							String sql = "select collID from college where collName='"+coll_jcb.getSelectedItem()+"'";
 							conn.rs = conn.stmt.executeQuery(sql);
+							conn.rs.next();
 							String collID = conn.rs.getString(1);
 							sql = "select distinct majorName from major where collID='"+collID+"'";
 							conn.rs = conn.stmt.executeQuery(sql);
@@ -233,6 +235,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 						major_jcb.addItem("All");
 						String sql = "select deptID from dept where deptName='"+dept_jcb.getSelectedItem()+"'";
 						conn.rs = conn.stmt.executeQuery(sql);
+						conn.rs.next();
 						String deptID = conn.rs.getString(1);
 						if(coll_jcb.getSelectedItem().equals("All")){//college is all
 							sql = "select distinct majorName from major where deptID='"+deptID+"'";
@@ -243,6 +246,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 						}else{// college is specific
 								sql = "select collID from college where collName='"+coll_jcb.getSelectedItem()+"'";
 								conn.rs = conn.stmt.executeQuery(sql);
+								conn.rs.next();
 								String collID = conn.rs.getString(1);
 								sql = "select distinct majorName from major where collID='"+collID+"' and deptID='"+deptID+"'";
 								conn.rs = conn.stmt.executeQuery(sql);
@@ -507,7 +511,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		
 	}
 	
-	public void updateCombox_dept(String coll, String dept, String major, String prof, String weekday, String timepart){
+	public void updateCombox_dept(String coll){
 		
 	}
 
@@ -532,11 +536,20 @@ public class ChooseCourse extends JPanel implements ActionListener{
 	class itemListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
 		   if (e.getStateChange() == ItemEvent.SELECTED) { //update table when options are changed
-			   updateTable();
-			   System.out.println(e.getItem()); //for test	    
-		   } else {
+			   if(e.getSource() == coll_jcb){
+				   System.out.println(e.getItem());
+				   initialCombox_dept();
+				   initialCombox_major();
+				   //updateCombox_dept((String)(e.getItem()));
+			   }
+			   if(e.getSource() == dept_jcb){
+				   System.out.println(e.getItem());
+				   initialCombox_major();
+				   //updateCombox_dept((String)(e.getItem()));
+			   }
 
-		   }
+			   updateTable();
+		   } 
 		}
 	}
 	
