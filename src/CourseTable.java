@@ -10,7 +10,8 @@ public class CourseTable extends JPanel{
 	private String host;
 	private String stuID;
 	
-	public CourseTable(){
+	public CourseTable(String stuID){
+		this.stuID = stuID;
 		makePanel();
 	}
 	public void makePanel(){

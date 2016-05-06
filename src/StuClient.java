@@ -21,7 +21,7 @@ public class StuClient extends JFrame{
 	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
 	private StuInfo stuInfo_jp = new StuInfo();
-	private CourseTable courseTable_jp = new CourseTable();
+	private CourseTable courseTable_jp = new CourseTable(stuID);
 	private ChooseCourse addCourse_jp = new ChooseCourse(stuID);
 	private DropCourse dropCourse_jp = new DropCourse();
 	private StuGrades grades_jp = new StuGrades();
@@ -39,7 +39,7 @@ public class StuClient extends JFrame{
 	private JMenuItem setting = new JMenuItem("Setting");
 	private JMenuItem signout = new JMenuItem("Sign Out");
 	
-	StuClient(String ID){
+	public StuClient(String stuID){
 		//initialize window title and size
 		super("SIT Course System Client for Student");
 		setVisible(true);
@@ -50,7 +50,8 @@ public class StuClient extends JFrame{
 		this.setSize(new Dimension(800,600));
 		tabbedPane_main.setBackground(Color.WHITE);
 
-		
+		this.stuID = stuID;
+
 		//initialize frame
 		setMenu();
 		setMainFrame();

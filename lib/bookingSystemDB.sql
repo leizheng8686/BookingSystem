@@ -1,4 +1,4 @@
-
+drop database courseBooking;
 create database courseBooking;
 use courseBooking;
 /*
@@ -33,13 +33,23 @@ constraint class_fk2 foreign key(collID) references college(collID)
 
 create table student(
 stuID char(12) primary key,firstame varchar(20) not null,middlename varchar(20),lastname varchar(20) not null, 
-stuGender char(6) check(stuGender='Male' or stuGender='Female'),
+gender char(6) check(stuGender='Male' or stuGender='Female'),
 stuBirth date,nationality varchar(15),
 collID char(2) not null,deptID char(4), majorID char(6) not null,
 enrollTime date not null, graduateTime date,
 constraint stu_fk1 foreign key(deptID) references dept(deptID),
 constraint stu_fk2 foreign key(collID) references college(collID),
 constraint stu_fk3 foreign key(majorID) references major(majorID)
+);
+
+create table professor(
+profID char(8) primary key,firstame varchar(20) not null,middlename varchar(20),lastname varchar(20) not null,
+gender char(6) check(gender='Male' or gender='Female'),
+birth date,nationality varchar(15),
+collID char(2) not null,deptID char(4),
+comeTime date not null, leaveTime date,
+constraint prof_fk1 foreign key(deptID) references dept(deptID),
+constraint prof_fk2 foreign key(collID) references college(collID)
 );
 
 create table course(
@@ -59,7 +69,7 @@ constraint couinfo_key primary key(courseID,courseDay,courseTime,location)
 );
 
 create table grade(
-stuID char(12),courseID char(8),grade tinyint unsigned default 0, credit numeric(4,1) default 0,
+stuID char(12),courseID char(8),score tinyint unsigned default 0, credit numeric(4,1) default 0,
 constraint grade_fk1 foreign key(courseID) references course(courseID),
 constraint grade_fk2 foreign key(stuID) references student(stuID),
 constraint grade_key primary key(stuID,courseID)
@@ -110,11 +120,13 @@ insert into course values('CPE593B','Applied Data Structures and Algorithms', 3.
 insert into course values('CPE695','Applied Machine Learning', 3.0,'01','0104', '010402');
 insert into course values('CS561B','Database Management Systems I', 3.0,'01','0101', '010101');
 insert into course values('CS555','Agile Methods for Software Developement', 3.0,'01','0101', '010101');
+insert into course values('EE810P','Engineering Programming: Python', 3.0,'01','0104', '010401');
 
-insert into courseinfo values('EE810J','1','3','X106', 'Dov Kruger', 30, 30, 'Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented,[13] and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere" (WORA),[14] meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.[15] Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of computer architecture.');
+insert into courseinfo values('EE810J','1','3','X106', 'Dov Kruger', 30, 30, 'Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere" (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of computer architecture.');
 insert into courseinfo values('EE810C','3','3','EE715', 'Dov Kruger ', 30, 30, 'Hello, I am an introduction.');
-insert into courseinfo values('CPE593B','2','3','M205', 'Dov Kruger', 30, 30, 'Hello, I am an introduction.');
-insert into courseinfo values('CPE695','3','4','BC210', 'Duan', 30, 30, 'Hello, I am an introduction.');
-insert into courseinfo values('CS561B','4','4','E222', 'Kim Samuel', 30, 30, 'Hello, I am an introduction.');
-insert into courseinfo values('CS555','3','3','BC304', 'Rowland James', 30, 30, 'Hello, I am an introduction.');
+insert into courseinfo values('CPE593B','2','3','M205', 'Dov Kruger', 30, 0, 'Hello, I am Applied Data Structures and Algorithms.');
+insert into courseinfo values('CPE695','3','4','BC210', 'Duan', 30, 30, 'Hello, I am Applied Machine Learning.');
+insert into courseinfo values('CS561B','4','4','E222', 'Kim Samuel', 30, 30, 'Hello, I am Database Management Systems I.');
+insert into courseinfo values('CS555','3','3','BC304', 'Rowland James', 30, 30, 'Hello, I am Agile Methods for Software Developement.');
+insert into courseinfo values('EE810P','5','1','BC107', 'Mukundan Iyengar', 30, 30, 'Hello, I am Engineering Programming: Python.');
 

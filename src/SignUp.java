@@ -87,7 +87,7 @@ public class SignUp extends JPanel implements ActionListener{
 						JOptionPane.showMessageDialog(this,"The login and/or password you specified are not correct.","Error",
 						                           JOptionPane.ERROR_MESSAGE);
 					}
-					cdb.closeConn();//close connection
+					cdb.close();//close connection
 			}catch(SQLException ea){
 			ea.printStackTrace();  
 			}
