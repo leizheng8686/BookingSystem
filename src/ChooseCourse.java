@@ -507,45 +507,16 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		return timepart;
 	}
 	
-	public void updateCombox_coll(String coll, String dept, String major, String prof, String weekday, String timepart){
-		
-	}
-	
-	public void updateCombox_dept(String coll){
-		
-	}
-
-	public void updateCombox_major(String coll, String dept, String major, String prof, String weekday, String timepart){
-		
-	}
-
-	public void updateCombox_prof(String coll, String dept, String major, String prof, String weekday, String timepart){
-		
-	}
-
-	public void updateCombox_weekday(String coll, String dept, String major, String prof, String weekday, String timepart){
-		
-	}
-
-	public void updateCombox_timepart(String coll, String dept, String major, String prof, String weekday, String timepart){
-		
-	}
-
-	
 	// comboBox actionListener
 	class itemListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
 		   if (e.getStateChange() == ItemEvent.SELECTED) { //update table when options are changed
 			   if(e.getSource() == coll_jcb){
-				   System.out.println(e.getItem());
 				   initialCombox_dept();
 				   initialCombox_major();
-				   //updateCombox_dept((String)(e.getItem()));
 			   }
 			   if(e.getSource() == dept_jcb){
-				   System.out.println(e.getItem());
 				   initialCombox_major();
-				   //updateCombox_dept((String)(e.getItem()));
 			   }
 
 			   updateTable();
