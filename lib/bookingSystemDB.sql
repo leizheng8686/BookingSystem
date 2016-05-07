@@ -33,10 +33,12 @@ constraint class_fk2 foreign key(collID) references college(collID)
 
 create table student(
 stuID char(12) primary key,firstname varchar(20) not null,middlename varchar(20),lastname varchar(20) not null, 
+
 gender char(6) check(gender='Male' or gender='Female'),
+
 stuBirth date,nationality varchar(15),
 collID char(2) not null,deptID char(4), majorID char(6) not null,
-enrollTime date not null, graduateTime date,
+enrollTime date not null, graduateTime date,Email char(20),address char(20),phone char(15),
 constraint stu_fk1 foreign key(deptID) references dept(deptID),
 constraint stu_fk2 foreign key(collID) references college(collID),
 constraint stu_fk3 foreign key(majorID) references major(majorID)
@@ -103,10 +105,12 @@ insert into major values('010402', '0104', '01','Computer Engineering');
 insert into major values('010403', '0104', '01','Information and Data Engineering');
 insert into major values('010101', '0101', '01','Computer Science');
 
-insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010402','2015-9-1', '2017-5-15');
-#insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010303','2015-9-1');
+insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010402','2015-9-1', '2017-5-15','','','');
+insert into student values('10411379','Shengkai', '', 'Yu', 'Male','1992-10-25','China','01','0104','010402','2015-9-1','2017-5-15','ysk1@163.com','newport****','201****');
 
 insert into user_stu values('10399614','10399614');
+insert into user_stu values('10411379','10411379');
+
 #insert into user_stu values('200501030218','200501030218');
 #insert into user_stu values('200501020319','200501020319');
 #insert into user_stu values('200502020319','200502020319');

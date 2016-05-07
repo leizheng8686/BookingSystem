@@ -9,6 +9,7 @@ public class CourseTable extends JPanel{
 	
 	private String host;
 	private String stuID;
+	private GetStuInfo getsi;
 	private connectDB conn = new connectDB();
 	
 	public CourseTable(String stuID){
@@ -54,12 +55,13 @@ public class CourseTable extends JPanel{
 		                                3, 3); //xPad, yPad
 
 		//basic info
+		String[] baseinfo=getsi.getBaseInfo(stuID);
 		JLabel StuName_jl = new JLabel("Student Name: ");           //JLabel Student Name
-		JLabel stuName_jl = new JLabel("Lei Zheng");
+		JLabel stuName_jl = new JLabel(baseinfo[1]);
 		StuName_jl.setFont(new Font("Serif", Font.BOLD, 14));
 		stuName_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
 		JLabel StuID_jl = new JLabel("Student ID: ");				//JLabel Student ID
-		JLabel stuID_jl = new JLabel("123456789");
+		JLabel stuID_jl = new JLabel(baseinfo[0]);
 		StuID_jl.setFont(new Font("Serif", Font.BOLD, 14));
 		stuID_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
 		JLabel CurrentTerm_jl = new JLabel("Current Term: ");          //JLabel Current Term
