@@ -1,93 +1,112 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class StuInfo extends JPanel{
-	StuInfo(){
-		setup();
+import javax.swing.*;
+import java.awt.*;
+
+public class StuInfo extends JPanel implements ActionListener{
+	private String host;
+	//private JPanel jp=new JPanel();
+	private String stu_id;
+	//private Connection conn;
+	//private Statement stmt;
+	private GetStuInfo getsi;
+	
+	private JLabel[] jlArray={new JLabel("StudentID:"),new JLabel("FirstName:"),
+							  new JLabel("MiddleName:"),new JLabel("LastName:"),
+			                  new JLabel("Gender:"), new JLabel("Birthday:"),new JLabel("Nationality:"),
+			                  new JLabel("College:"), new JLabel("Department:"),
+			                  new JLabel("Major:"), new JLabel("Enrolltime:"),
+			                  new JLabel("Graduatetime:"), new JLabel("Address:"),
+			                  new JLabel("E-mail:"), new JLabel("Phone number:")
+	};
+	private JLabel[] jlinfo=new JLabel[12];
+	private JTextField[] jtArray=new JTextField[3];
+	private JButton[] jbArray={new JButton("Change"),new JButton("Change"),
+							   new JButton("Change"),new JButton("Apply")};
+	
+	//@Override
+	public StuInfo(String stu_id,String host){
+		this.host=host;
+		this.stu_id=stu_id;
+		getsi=new GetStuInfo(host);
+		this.initialFrame();
+		this.addListener();
 	}
-	public void setup(){
-	//course table
-			SpringLayout table_jsl = new SpringLayout();
-			this.setLayout(table_jsl);
-			this.setBackground(Color.WHITE);
-			//basic info
-			JLabel StuName_jl = new JLabel("Student Name:  ");          //JLabel Student Name
-			JLabel stuName_jl = new JLabel("Lei Zheng");
-			StuName_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			stuName_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel StuID_jl = new JLabel("Student ID:  ");				//JLabel Student ID
-			JLabel stuID_jl = new JLabel("xxxxxxx");
-			StuID_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			stuID_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Gender_jl = new JLabel("Gender:  ");						//JLabel Gender
-			JLabel gender_jl = new JLabel("xxxxxxxx");
-			Gender_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			gender_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Nation_jl = new JLabel("Nationality:  ");			//JLabel Nationality
-			JLabel nation_jl = new JLabel("xxxxxxx");
-			Nation_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			nation_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Birth_jl = new JLabel("Birthday:  ");				//JLabel Birthday
-			JLabel birth_jl = new JLabel("xxxxxxx");
-			Birth_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			birth_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel splitline = new JLabel("------------------------------------------------------------------------------------"); //JLabel split line
-			JLabel Major_jl = new JLabel("Major:  ");						//JLabel Major
-			JLabel major_jl = new JLabel("xxxxxxxx");
-			Major_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			major_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Department_jl = new JLabel("Department:  ");			//JLabel Department
-			JLabel department_jl = new JLabel("xxxxxxx");
-			Department_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			department_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Enrolltime_jl = new JLabel("Enrollment Time:  ");				//JLabel Enrollment Time
-			JLabel enrolltime_jl = new JLabel("xxxxxxx");
-			Enrolltime_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			enrolltime_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			JLabel Gradtime_jl = new JLabel("Estimated Graduate Time:  ");				//JLabel Estimated Graduate Time
-			JLabel gradtime_jl = new JLabel("xxxxxxx");
-			Gradtime_jl.setFont(new Font("Serif", Font.BOLD, 14));
-			gradtime_jl.setFont(new Font("Serif", Font.ROMAN_BASELINE, 14));
-			
-			
-			//set gap size between labels
-			int gap = 60;
-			this.add(StuName_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, StuName_jl, 10, SpringLayout.NORTH, this);
-			table_jsl.putConstraint(SpringLayout.WEST, StuName_jl, 20, SpringLayout.WEST, this);
-			this.add(stuName_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, stuName_jl, 10, SpringLayout.NORTH, this);
-			table_jsl.putConstraint(SpringLayout.WEST, stuName_jl, gap, SpringLayout.EAST, StuName_jl);
-			this.add(StuID_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, StuID_jl, 10, SpringLayout.SOUTH, StuName_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, StuID_jl, 20, SpringLayout.WEST, this);
-			this.add(stuID_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, stuID_jl, 10, SpringLayout.SOUTH, StuName_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, stuID_jl, 0, SpringLayout.WEST, stuName_jl);
-			this.add(Gender_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, Gender_jl, 10, SpringLayout.SOUTH, StuID_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, Gender_jl, 20, SpringLayout.WEST, this);
-			this.add(gender_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, gender_jl, 10, SpringLayout.SOUTH, StuID_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, gender_jl, 0, SpringLayout.WEST, stuName_jl);
-			this.add(Nation_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, Nation_jl, 10, SpringLayout.SOUTH, Gender_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, Nation_jl, 20, SpringLayout.WEST, this);
-			this.add(nation_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, nation_jl, 10, SpringLayout.SOUTH, Gender_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, nation_jl, 0, SpringLayout.WEST, stuName_jl);
-			this.add(Birth_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, Birth_jl, 10, SpringLayout.SOUTH, Nation_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, Birth_jl, 20, SpringLayout.WEST, this);
-			this.add(birth_jl);
-			table_jsl.putConstraint(SpringLayout.NORTH, birth_jl, 10, SpringLayout.SOUTH, Nation_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, birth_jl, 0, SpringLayout.WEST, stuName_jl);
-			this.add(splitline);
-			table_jsl.putConstraint(SpringLayout.NORTH, splitline, 10, SpringLayout.SOUTH, Birth_jl);
-			table_jsl.putConstraint(SpringLayout.WEST, splitline, 20, SpringLayout.WEST, this);
-			
-			
+	public void addListener(){
+		for(int i=0;i<4;i++){
+			jbArray[i].addActionListener(this);
+		}
 	}
+	public void initialFrame()
+	{	String[] baseinfo=getsi.getBaseInfo(this.stu_id);
+		//System.out.println("The stuid in StuInfo is "+this.stu_id);
+		this.setLayout(null);
+		for(int i=0;i<15;i++){
+			jlArray[i].setBounds(60,20+i*35,120,20);
+			jlArray[i].setFont(new Font("Serif",Font.BOLD,14));
+			this.add(jlArray[i]);
+		}
+		for(int i=0;i<12;i++){
+			jlinfo[i]=new JLabel(baseinfo[i]);
+			jlinfo[i].setBounds(210, 20+i*35, 120, 20);
+			jlinfo[i].setFont(new Font("Serif",Font.ROMAN_BASELINE,14));
+			this.add(jlinfo[i]);
+		}
+		for(int i=0;i<3;i++){
+			jtArray[i]=new JTextField(baseinfo[i+12]);
+			jtArray[i].setBounds(210,440+i*35,120,20);
+			jtArray[i].setEditable(false);
+			jtArray[i].setFont(new Font("Serif",Font.ROMAN_BASELINE,14));
+			this.add(jtArray[i]);
+		}
+		for(int i=0;i<3;i++){
+			jbArray[i].setBounds(360, 440+i*35, 60, 20);
+			this.add(jbArray[i]);
+		}
+		jbArray[3].setBounds(200, 560, 60, 20);
+		this.add(jbArray[3]);
+		jbArray[3].setVisible(false);
+		//this.setTitle("Student Information");
+		this.setVisible(true);
+		this.setBounds(0,0,600,2000);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==this.jbArray[0]){
+			jtArray[0].setEditable(true);
+			jbArray[3].setVisible(true);
+		}
+		if(e.getSource()==this.jbArray[1]){
+			jtArray[1].setEditable(true);
+			jbArray[3].setVisible(true);
+		}
+		if(e.getSource()==this.jbArray[2]){
+			jtArray[2].setEditable(true);
+			jbArray[3].setVisible(true);
+		}
+		if(e.getSource()==this.jbArray[3]){
+			String sql="update student SET Email='"+jtArray[0].getText()+"',address='"+jtArray[1].getText()+"',phone='"+jtArray[2].getText()+"' where stuID='"+stu_id+"'";
+			System.out.println(sql);
+			connectDB conn=new connectDB();
+			jtArray[0].setEditable(false);
+			jtArray[1].setEditable(false);
+			jtArray[2].setEditable(false);
+			jbArray[3].setVisible(false);
+			try
+			{
+				conn.stmt.execute(sql);
+				JOptionPane.showMessageDialog(null, "Changed");
+				//System.out.println("i am here");
+			}
+			catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+		
+	}
+	/*public static void main(String[] arg){
+		StuInfo a=new StuInfo("a","a");
+	}*/
+
 }
 
