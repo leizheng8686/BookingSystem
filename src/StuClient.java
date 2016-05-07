@@ -53,9 +53,9 @@ public class StuClient extends JFrame{
 		this.stuID = stuID;
 
 		stuInfo_jp = new StuInfo(this.stuID,host);
-		courseTable_jp = new CourseTable(stuID);
-		addCourse_jp = new ChooseCourse(stuID);
-		//dropCourse_jp = new DropCourse(this.stuID,host);
+		courseTable_jp = new CourseTable(this.stuID);
+		addCourse_jp = new ChooseCourse(this.stuID);
+		dropCourse_jp = new DropCourse(this.stuID);
 		grades_jp = new StuGrades();
 		//initialize frame
 		setMenu();
@@ -108,6 +108,8 @@ public class StuClient extends JFrame{
 		public void stateChanged(ChangeEvent e) {
 			// TODO Auto-generated method stub
 			courseTable_jp.updateCourseTable();
+			addCourse_jp.updateTable();
+			dropCourse_jp.updateTable();
 		}
 	}
 }
