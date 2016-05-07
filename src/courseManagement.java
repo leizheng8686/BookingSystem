@@ -11,5 +11,5 @@ import javax.swing.table.DefaultTableModel;
 
 public class courseManagement extends JPanel{
 	
-	
+
 }
