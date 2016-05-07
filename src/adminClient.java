@@ -20,10 +20,8 @@ public class adminClient extends JFrame{
 	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
 	private StuInfo stuInfo_jp;
-	private CourseTable courseTable_jp;
 	private courseManagement courseM_jp;
-	private DropCourse dropCourse_jp;
-	private StuGrades grades_jp;
+	private gradeManagement gradeM_jp;
 	//private JScrollPane courseTable_jsp = new JScrollPane();
 
 	//Buttons
@@ -53,10 +51,9 @@ public class adminClient extends JFrame{
 
 		//create new panels
 		stuInfo_jp = new StuInfo(this.stuID,host);
-		courseTable_jp = new CourseTable(adminID);
 		courseM_jp = new courseManagement();
 		//dropCourse_jp = new DropCourse(this.stuID,host);
-		grades_jp = new StuGrades();
+		gradeM_jp = new gradeManagement();
 		//initialize frame
 		setMenu();
 		setMainFrame();
@@ -71,11 +68,9 @@ public class adminClient extends JFrame{
 	}
 	
 	private void setMainFrame(){
-		tabbedPane_main.addTab("Personal Information", stuInfo_jp);
-		tabbedPane_main.addTab("    Course Table    ", courseTable_jp);
+		tabbedPane_main.addTab(" Student Management  ", stuInfo_jp);
 		tabbedPane_main.addTab("  Course Management  ", courseM_jp);
-		tabbedPane_main.addTab("    Drop Course     ", dropCourse_jp);
-		tabbedPane_main.addTab("       Grades       ", grades_jp);
+		tabbedPane_main.addTab("  Grades Management  ", gradeM_jp);
 
 		c.add(tabbedPane_main);
 		
@@ -95,11 +90,12 @@ public class adminClient extends JFrame{
 		}
 	}
 	
+	//set action when the tab is changed
 	public class myChangeListener  implements ChangeListener{
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			// TODO Auto-generated method stub
-			courseTable_jp.updateCourseTable();
+			//courseTable_jp.updateCourseTable();
 		}
 	}
 	
