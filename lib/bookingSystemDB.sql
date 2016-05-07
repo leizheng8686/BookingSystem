@@ -38,7 +38,7 @@ gender char(6) check(gender='Male' or gender='Female'),
 
 stuBirth date,nationality varchar(15),
 collID char(2) not null,deptID char(4), majorID char(6) not null,
-enrollTime date not null, graduateTime date,Email char(20),address char(20),phone char(15),
+enrollTime date not null, graduateTime date,Email varchar(30),address varchar(50),phone varchar(15),
 constraint stu_fk1 foreign key(deptID) references dept(deptID),
 constraint stu_fk2 foreign key(collID) references college(collID),
 constraint stu_fk3 foreign key(majorID) references major(majorID)
@@ -71,7 +71,7 @@ constraint couinfo_key primary key(courseID,courseDay,courseTime,location)
 );
 
 create table grade(
-stuID char(12),courseID char(8) not null,courseName varchar(50) not null,instructor varchar(20) not null,
+stuID char(12) not null,courseID char(8) not null,courseName varchar(50) not null,instructor varchar(20) not null,
 score tinyint unsigned default 0, credit numeric(4,1) default 0,
 constraint grade_fk2 foreign key(stuID) references student(stuID),
 constraint grade_key primary key(stuID,courseID)
@@ -105,7 +105,7 @@ insert into major values('010402', '0104', '01','Computer Engineering');
 insert into major values('010403', '0104', '01','Information and Data Engineering');
 insert into major values('010101', '0101', '01','Computer Science');
 
-insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010402','2015-9-1', '2017-5-15','','','');
+insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010402','2015-9-1', '2017-5-15','leizheng8686@gmail.com','Jersey City','123456789');
 insert into student values('10411379','Shengkai', '', 'Yu', 'Male','1992-10-25','China','01','0104','010402','2015-9-1','2017-5-15','ysk1@163.com','newport****','201****');
 
 insert into user_stu values('10399614','10399614');

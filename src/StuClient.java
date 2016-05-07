@@ -55,7 +55,7 @@ public class StuClient extends JFrame{
 		stuInfo_jp = new StuInfo(this.stuID,host);
 		courseTable_jp = new CourseTable(stuID);
 		addCourse_jp = new ChooseCourse(stuID);
-		dropCourse_jp = new DropCourse(this.stuID,host);
+		//dropCourse_jp = new DropCourse(this.stuID,host);
 		grades_jp = new StuGrades();
 		//initialize frame
 		setMenu();

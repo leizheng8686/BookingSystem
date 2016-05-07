@@ -7,12 +7,13 @@ import layout.SpringUtilities;
 //student courses table
 public class CourseTable extends JPanel{
 	
-	private String host;
+	private String host="127.0.0.1:3306";
 	private String stuID;
 	private GetStuInfo getsi;
 	private connectDB conn = new connectDB();
 	
 	public CourseTable(String stuID){
+		getsi=new GetStuInfo(host);
 		this.stuID = stuID;
 		makePanel();
 		updateCourseTable();
@@ -55,7 +56,7 @@ public class CourseTable extends JPanel{
 		                                3, 3); //xPad, yPad
 
 		//basic info
-		String[] baseinfo=getsi.getBaseInfo(stuID);
+		String[] baseinfo=getsi.getBaseInfo(this.stuID);
 		JLabel StuName_jl = new JLabel("Student Name: ");           //JLabel Student Name
 		JLabel stuName_jl = new JLabel(baseinfo[1]);
 		StuName_jl.setFont(new Font("Serif", Font.BOLD, 14));
@@ -97,7 +98,7 @@ public class CourseTable extends JPanel{
 	}
 	public void updateCourseTable(){
 		try{
-			String sql = "select courseName,courseDay, courseTime from course,courseinfo,grade "
+			String sql = "select course.courseName,courseDay, courseTime from course,courseinfo,grade "
 					+ " where course.courseID=courseinfo.courseID and courseinfo.courseID=grade.courseID and grade.score=0 and grade.StuID='"
 					+ stuID +"'";
 			conn.rs = conn.stmt.executeQuery(sql);

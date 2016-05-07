@@ -52,10 +52,10 @@ public class adminClient extends JFrame{
 		this.adminID = adminID;
 
 		//create new panels
-		stuInfo_jp = new StuInfo();
+		stuInfo_jp = new StuInfo(this.stuID,host);
 		courseTable_jp = new CourseTable(adminID);
 		courseM_jp = new courseManagement();
-		dropCourse_jp = new DropCourse();
+		//dropCourse_jp = new DropCourse(this.stuID,host);
 		grades_jp = new StuGrades();
 		//initialize frame
 		setMenu();
