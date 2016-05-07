@@ -21,3 +21,5 @@
 /courseManagement$makeAddWin.class
 /courseManagement$makeAddWin$addConfirmActionListener.class
 /courseManagement$makeCourseinfoWin$myFocusListener.class
+/gradeManagement.class
+/GetStuInfo.class

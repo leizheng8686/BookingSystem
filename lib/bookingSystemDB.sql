@@ -69,7 +69,7 @@ constraint couinfo_key primary key(courseID,courseDay,courseTime,location)
 );
 
 create table grade(
-stuID char(12),courseID char(8) not null,courseName varchar(50) not null,
+stuID char(12),courseID char(8) not null,courseName varchar(50) not null,instructor varchar(20) not null,
 score tinyint unsigned default 0, credit numeric(4,1) default 0,
 constraint grade_fk2 foreign key(stuID) references student(stuID),
 constraint grade_key primary key(stuID,courseID)
