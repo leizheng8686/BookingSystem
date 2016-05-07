@@ -618,7 +618,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 				    	conn.rs.close();
 				    	return;
 				    }
-					String sql3="select courseName from course,courseinfo,grade "+
+					String sql3="select course.courseName from course,courseinfo,grade "+
 					             "where grade.courseID=course.courseID "+
 					            "and grade.courseID=courseinfo.courseID "+
 					            "and grade.stuID='"+stuID+"' "+
@@ -634,8 +634,17 @@ public class ChooseCourse extends JPanel implements ActionListener{
 					 }
 					 else
 					 {//no time conflict - add course
-					 	String sql="insert into grade(stuID,courseID) values"+
-					 	            "('"+stuID+"','"+courseID+"')";
+						String sql = "select course.courseName, courseinfo.teacher, course.credit from course, courseinfo "
+								+ "where course.courseID='"+courseID+"' and courseinfo.courseID='"+courseID+"'"; 
+						System.out.println(sql);
+						conn.rs = conn.stmt.executeQuery(sql);
+						conn.rs.next();
+						String courseName = conn.rs.getString(1);
+						String instructor = conn.rs.getString(2);
+						String credit = conn.rs.getString(3);
+					 	sql="insert into grade values"+
+					 	            "('"+stuID+"','"+courseID+"','"+courseName+"','"+instructor+"','0','"+credit+"')";
+					 	System.out.println(sql);
 						int i=conn.stmt.executeUpdate(sql);
 						if(i==1)
 						{//successful
