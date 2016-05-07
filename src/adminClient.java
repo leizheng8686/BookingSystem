@@ -1,11 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 //administration client window
 public class adminClient extends JFrame{
 	private String host;
 	private String adminID;
+	private String stuID;
 	//window size variable
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = screenSize.width/2;
@@ -16,11 +19,11 @@ public class adminClient extends JFrame{
 	// TabbedPane and items
 	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
-	private StuInfo stuInfo_jp = new StuInfo();
-	private CourseTable courseTable_jp = new CourseTable(adminID);
-	private ChooseCourse addCourse_jp = new ChooseCourse(adminID);
-	private DropCourse dropCourse_jp = new DropCourse();
-	private StuGrades grades_jp = new StuGrades();
+	private StuInfo stuInfo_jp;
+	private CourseTable courseTable_jp;
+	private courseManagement courseM_jp;
+	private DropCourse dropCourse_jp;
+	private StuGrades grades_jp;
 	//private JScrollPane courseTable_jsp = new JScrollPane();
 
 	//Buttons
@@ -43,11 +46,17 @@ public class adminClient extends JFrame{
 		int centerX=screenSize.width/2;
 		int centerY=screenSize.height/2;
 		this.setLocation(centerX-width/2,centerY-height/2-100);
-		this.setSize(new Dimension(800,600));
+		this.setSize(new Dimension(860,600));
 		tabbedPane_main.setBackground(Color.WHITE);
 
 		this.adminID = adminID;
 
+		//create new panels
+		stuInfo_jp = new StuInfo();
+		courseTable_jp = new CourseTable(adminID);
+		courseM_jp = new courseManagement();
+		dropCourse_jp = new DropCourse();
+		grades_jp = new StuGrades();
 		//initialize frame
 		setMenu();
 		setMainFrame();
@@ -64,7 +73,7 @@ public class adminClient extends JFrame{
 	private void setMainFrame(){
 		tabbedPane_main.addTab("Personal Information", stuInfo_jp);
 		tabbedPane_main.addTab("    Course Table    ", courseTable_jp);
-		tabbedPane_main.addTab("     Add Course     ", addCourse_jp);
+		tabbedPane_main.addTab("  Course Management  ", courseM_jp);
 		tabbedPane_main.addTab("    Drop Course     ", dropCourse_jp);
 		tabbedPane_main.addTab("       Grades       ", grades_jp);
 
@@ -83,6 +92,14 @@ public class adminClient extends JFrame{
 	public class menuActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			
+		}
+	}
+	
+	public class myChangeListener  implements ChangeListener{
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			// TODO Auto-generated method stub
+			courseTable_jp.updateCourseTable();
 		}
 	}
 	

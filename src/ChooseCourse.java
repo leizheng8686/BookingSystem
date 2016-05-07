@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -55,6 +54,16 @@ public class ChooseCourse extends JPanel implements ActionListener{
 	//Vector for available course
 	private Vector<String> v_couid=new Vector<String>();
 	
+	//define table model to make cells not editable but selectable
+	public class MyTableModel extends DefaultTableModel{ 
+		public MyTableModel(Vector<Vector> v_data, Vector<String> v_head)
+		{
+			super(v_data, v_head);
+		}
+	    public boolean isCellEditable(int row, int column) { 
+		   return false;
+	    }
+   }
 	//Constructor
 	public ChooseCourse(String stuID){
 		//this.host=host;
@@ -119,8 +128,9 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		jspring.putConstraint(SpringLayout.EAST, uppart, 756, SpringLayout.WEST, this);
 		
 		//table 
-		DefaultTableModel dtm=new DefaultTableModel(v_data,v_head);
-		jt = new JTable(dtm);// create JTable for course info
+		//DefaultTableModel dtm=new DefaultTableModel(v_data,v_head);
+		MyTableModel tm = new MyTableModel(v_data,v_head);
+		jt = new JTable(tm);// create JTable for course info
 		jsp = new JScrollPane(jt);//put JTable in JScrollPane
 		jsp.setBackground(Color.WHITE);
 		
@@ -402,8 +412,9 @@ public class ChooseCourse extends JPanel implements ActionListener{
 				v.add(time);v.add(location);v.add(teacher);v.add(credit);v.add(restCapacity);
 				v_data.add(v);
 			}
-			DefaultTableModel tmodel=new DefaultTableModel(v_data,v_head);
-			jt.setModel(tmodel);
+			//DefaultTableModel tmodel=new DefaultTableModel(v_data,v_head);
+			MyTableModel tm = new MyTableModel(v_data,v_head);
+			jt.setModel(tm);
 			conn.rs.close();
 		}
 		catch(Exception e){e.printStackTrace();}
@@ -524,6 +535,19 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		}
 	}
 	
+	public Object getSelectedCourseID(){
+		return jt.getValueAt(jt.getSelectedRow(), 2);
+	}
+	
+	public boolean isSelected(){
+		if(jt.getSelectedRow() == -1){//no course selected
+			JOptionPane.showMessageDialog(this,"Please select a course.","Error",
+			                               JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+	
 	//Buttons ActionListener
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == intro_jb){
@@ -633,7 +657,15 @@ public class ChooseCourse extends JPanel implements ActionListener{
 			catch(Exception ea){ea.printStackTrace();}
 		}
 	}
-
+	//DIY methods for admin client
+	public void setTitle(String title){
+		intro.setText(title);
+	}
+	public void removeButtons(){
+		this.remove(add_jb);
+		this.remove(intro_jb);
+	}
+	
 	public static void main(String args[])
 	{
 		ChooseCourse cc=new ChooseCourse("10399614");

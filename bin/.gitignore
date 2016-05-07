@@ -8,3 +8,16 @@
 /MyScript$1.class
 /ChooseCourse$getSQLfromCombox.class
 /adminClient$menuActionListener.class
+/ChooseCourse$MyTableModel.class
+/StuClient$myChangeListener.class
+/adminClient$myChangeListener.class
+/courseManagement.class
+/courseManagement$myActionListener.class
+/courseManagement$makeCourseinfoWin.class
+/courseManagement$addConfirmActionListener.class
+/courseManagement$makeEditWin$editConfirmActionListener.class
+/courseManagement$makeEditWin.class
+/courseManagement$makeAddWin$editConfirmActionListener.class
+/courseManagement$makeAddWin.class
+/courseManagement$makeAddWin$addConfirmActionListener.class
+/courseManagement$makeCourseinfoWin$myFocusListener.class

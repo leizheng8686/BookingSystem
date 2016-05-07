@@ -1,8 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.SpringLayout;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.net.URL;
 
 //student client window
@@ -20,11 +20,11 @@ public class StuClient extends JFrame{
 	// TabbedPane and items
 	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
-	private StuInfo stuInfo_jp = new StuInfo();
-	private CourseTable courseTable_jp = new CourseTable(stuID);
-	private ChooseCourse addCourse_jp = new ChooseCourse(stuID);
-	private DropCourse dropCourse_jp = new DropCourse();
-	private StuGrades grades_jp = new StuGrades();
+	private StuInfo stuInfo_jp ;
+	private CourseTable courseTable_jp ;
+	private ChooseCourse addCourse_jp ;
+	private DropCourse dropCourse_jp ;
+	private StuGrades grades_jp ;
 	//private JScrollPane courseTable_jsp = new JScrollPane();
 
 	//Buttons
@@ -47,14 +47,21 @@ public class StuClient extends JFrame{
 		int centerX=screenSize.width/2;
 		int centerY=screenSize.height/2;
 		this.setLocation(centerX-width/2,centerY-height/2-100);
-		this.setSize(new Dimension(800,600));
+		this.setSize(new Dimension(860,600));
 		tabbedPane_main.setBackground(Color.WHITE);
 
 		this.stuID = stuID;
 
+		stuInfo_jp = new StuInfo();
+		courseTable_jp = new CourseTable(stuID);
+		addCourse_jp = new ChooseCourse(stuID);
+		dropCourse_jp = new DropCourse();
+		grades_jp = new StuGrades();
 		//initialize frame
 		setMenu();
 		setMainFrame();
+		
+		addListener();
 	}
 	
 	//set menu	
@@ -80,6 +87,7 @@ public class StuClient extends JFrame{
 		//Menu items
 		setting.addActionListener(new menuActionListener());
 		signout.addActionListener(new menuActionListener());
+		tabbedPane_main.addChangeListener(new myChangeListener());
 		
 		
 	}
@@ -92,6 +100,14 @@ public class StuClient extends JFrame{
 	
 	
 	public static void main(String[] arg){
-		new StuClient("123456789");
+		new StuClient("10399614");
+	}
+
+	public class myChangeListener  implements ChangeListener{
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			// TODO Auto-generated method stub
+			courseTable_jp.updateCourseTable();
+		}
 	}
 }

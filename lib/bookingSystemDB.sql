@@ -32,8 +32,8 @@ constraint class_fk2 foreign key(collID) references college(collID)
 
 
 create table student(
-stuID char(12) primary key,firstame varchar(20) not null,middlename varchar(20),lastname varchar(20) not null, 
-gender char(6) check(stuGender='Male' or stuGender='Female'),
+stuID char(12) primary key,firstname varchar(20) not null,middlename varchar(20),lastname varchar(20) not null, 
+gender char(6) check(gender='Male' or gender='Female'),
 stuBirth date,nationality varchar(15),
 collID char(2) not null,deptID char(4), majorID char(6) not null,
 enrollTime date not null, graduateTime date,
@@ -62,15 +62,15 @@ constraint cou_fk3 foreign key(majorID) references major(majorID)
 
 create table courseinfo(
 courseID char(8),courseDay char(1),courseTime char(1), location char(6), teacher varchar(20) not null,
-capacity tinyint unsigned default 30, restCapacity tinyint unsigned default 30,
+capacity tinyint unsigned default 30, restCapacity tinyint unsigned default 30, 
 description varchar(1000),
 constraint couinfo_fk1 foreign key(courseID) references course(courseID),
 constraint couinfo_key primary key(courseID,courseDay,courseTime,location)
 );
 
 create table grade(
-stuID char(12),courseID char(8),score tinyint unsigned default 0, credit numeric(4,1) default 0,
-constraint grade_fk1 foreign key(courseID) references course(courseID),
+stuID char(12),courseID char(8) not null,courseName varchar(50) not null,
+score tinyint unsigned default 0, credit numeric(4,1) default 0,
 constraint grade_fk2 foreign key(stuID) references student(stuID),
 constraint grade_key primary key(stuID,courseID)
 );
