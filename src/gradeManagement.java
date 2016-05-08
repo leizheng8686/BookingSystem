@@ -254,7 +254,7 @@ public class gradeManagement extends JPanel{
 			c = jframe.getContentPane();
 			jframe.setVisible(true);
 			jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			jframe.setLocation(centerX-width/2,centerY-height/2-100);
+			jframe.setLocation(centerX-200,centerY-height/2-100);
 			jframe.setSize(new Dimension(400,600));
 			//main panel
 			slayout = new SpringLayout();
@@ -315,7 +315,6 @@ public class gradeManagement extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				System.out.println(jt.getRowCount());
 				int i = 0;
 				for(int x=0;x<jt.getRowCount();x++){
@@ -530,7 +529,6 @@ public class gradeManagement extends JPanel{
 				//DefaultTableModel tmodel=new DefaultTableModel(v_data,v_head);
 				MyTableModel tm = new MyTableModel(v_data,v_head);
 				jt.setModel(tm);
-				//TODO: initialize comboBox
 			}
 			catch(Exception e){e.printStackTrace();}
 			finally{try{conn.rs.close();}catch(Exception E){E.printStackTrace();}
