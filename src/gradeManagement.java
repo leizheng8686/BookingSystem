@@ -285,7 +285,7 @@ public class gradeManagement extends JPanel{
 			//add confirm button
 			confm.setSize(100, 30);
 			jp.add(confm);	
-			slayout.putConstraint(SpringLayout.NORTH, confm, 5, SpringLayout.SOUTH, grade_jsp);
+			slayout.putConstraint(SpringLayout.NORTH, confm, 20, SpringLayout.SOUTH, grade_jsp);
 			slayout.putConstraint(SpringLayout.WEST, confm, 150, SpringLayout.WEST, jp);
 			slayout.putConstraint(SpringLayout.SOUTH, confm, -10, SpringLayout.SOUTH, jp);
 			confm.addActionListener(new mylistener());

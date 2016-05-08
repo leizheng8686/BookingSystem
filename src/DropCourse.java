@@ -45,12 +45,12 @@ public class DropCourse extends JPanel implements ActionListener{
 	
 	public void makePanel(){
 		drop.addActionListener(this);
-		this.add(currentCourses);
 		//currentCourses.setBounds(40,40,20,10);
 		jspring = new SpringLayout();
 		this.setLayout(jspring);
 		this.setVisible(true);
 		this.setBackground(Color.white);
+		this.add(currentCourses);
 		jspring.putConstraint(SpringLayout.NORTH, currentCourses, 20, SpringLayout.NORTH, this);
 		jspring.putConstraint(SpringLayout.WEST, currentCourses, 20, SpringLayout.WEST, this);
 		
@@ -58,16 +58,18 @@ public class DropCourse extends JPanel implements ActionListener{
 		course=new JTable(dtm);
 		jsp=new JScrollPane(course);
 		jsp.setBackground(Color.WHITE);
+		jsp.setPreferredSize(new Dimension(760,300));
 		this.add(jsp);
 		jspring.putConstraint(SpringLayout.NORTH, jsp, 20, SpringLayout.SOUTH, currentCourses);
 		jspring.putConstraint(SpringLayout.WEST, jsp, 20, SpringLayout.WEST, this);
-		jspring.putConstraint(SpringLayout.EAST, jsp, 756, SpringLayout.WEST, this);
+		jspring.putConstraint(SpringLayout.EAST, jsp, -20, SpringLayout.EAST, this);
+		jspring.putConstraint(SpringLayout.SOUTH, jsp, -200, SpringLayout.SOUTH, this);
 		
-		drop.setSize(50,30);
+		drop.setPreferredSize(new Dimension(100,30));
 		this.add(drop);
 		drop.setVisible(true);
 		jspring.putConstraint(SpringLayout.NORTH, drop, 20, SpringLayout.SOUTH, jsp);
-		jspring.putConstraint(SpringLayout.EAST, drop, 700, SpringLayout.WEST, jsp);
+		jspring.putConstraint(SpringLayout.WEST, drop, 370, SpringLayout.WEST, this);
 		//this.setVisible(true);
 	}
 	//initialize table data
@@ -211,6 +213,11 @@ public class DropCourse extends JPanel implements ActionListener{
 	}
 	
 	public static void main(String[] arg){
-		DropCourse a=new DropCourse("10411379");
+		DropCourse cc=new DropCourse("10399614");
+		JFrame jf=new JFrame();
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setBounds(10,10,900,600);
+		jf.add(cc);
+		jf.setVisible(true);
 	}
 }
