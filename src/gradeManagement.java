@@ -27,6 +27,7 @@ public class gradeManagement extends JPanel{
 	private JLabel dept = new JLabel("Department : ");
 	private JLabel major = new JLabel("Major : ");
 	private JLabel prof = new JLabel("Professor : ");
+	private JLabel courseid = new JLabel("Coure ID: ");
 	//JTextField
 	private JTextField search_tf = new JTextField("Please type a course ID");
 	//JComboBoxes
@@ -43,7 +44,7 @@ public class gradeManagement extends JPanel{
 	private JButton search_jb = new JButton("Search");// delete-course button
 	private JButton edit_jb = new JButton("View and Edit");// edit-course button
 	//JTable for course list
-	private JTable jt;
+	private JTable jt = new JTable();
 	//Vector for table header and content
 	private Vector<String> v_head=new Vector<String>();
 	private Vector<Vector> v_data=new Vector<Vector>();
@@ -64,6 +65,7 @@ public class gradeManagement extends JPanel{
 		this.setLayout(jspring);
 		this.setVisible(true);
 		this.setBackground(new Color(255,250,240));
+		initialData();
 		makePanel();
 		addListener();
 	}
@@ -73,7 +75,7 @@ public class gradeManagement extends JPanel{
 		this.initialCombox_dept();
 		this.initialCombox_major();
 		this.initialCombox_prof();
-		this.initialTable("","","","","","");//initialize table data
+		this.initialTable();//initialize table data
 
 	}
 	
@@ -83,10 +85,18 @@ public class gradeManagement extends JPanel{
 		this.setVisible(true);
 		//this.setSize(800,600);
 		this.setBackground(Color.WHITE);
+		//search area
+		search_jp = new JPanel(new FlowLayout(0,10,10));
+		search_jp.setSize(400,30);
+		courseid.setSize(80,30);
+		search_tf.setSize(100,40);
+		search_jb.setSize(60, 30);
+		search_jp.add(courseid);
+		search_jp.add(search_tf);
+		search_jp.add(search_jb);
+		//options area
 		grid_jp = new JPanel(new GridLayout(3,1,5,5));
 		grid_jp.setBackground(Color.WHITE);
-		
-		//options area
 		JPanel coll_dept = new JPanel(new GridLayout(1,4,10,0));
 		coll_dept.add(coll);
 		coll_dept.add(coll_jcb);
@@ -100,16 +110,20 @@ public class gradeManagement extends JPanel{
 		major_prof.add(prof_jcb);
 		grid_jp.add(major_prof);
 		grid_jp.add(new JLabel());
+		//set the search area location
+		this.add(search_jp);
+		jspring.putConstraint(SpringLayout.NORTH, search_jp, 10, SpringLayout.NORTH, this);
+		jspring.putConstraint(SpringLayout.WEST, search_jp, 20, SpringLayout.WEST, this);
 		//set the options area location
 		this.add(grid_jp);
-		jspring.putConstraint(SpringLayout.NORTH, grid_jp, 10, SpringLayout.NORTH, this);
+		jspring.putConstraint(SpringLayout.NORTH, grid_jp, 10, SpringLayout.SOUTH, search_jp);
 		jspring.putConstraint(SpringLayout.WEST, grid_jp, 20, SpringLayout.WEST, this);
 		jspring.putConstraint(SpringLayout.EAST, grid_jp, 756, SpringLayout.WEST, this);
 		
 		//table 
 		//DefaultTableModel dtm=new DefaultTableModel(v_data,v_head);
 		MyTableModel tm = new MyTableModel(v_data,v_head);
-		jt = new JTable(tm);// create JTable for course info
+		jt.setModel(tm);// create JTable for course info
 		jsp = new JScrollPane(jt);//put JTable in JScrollPane
 		jsp.setBackground(Color.WHITE);
 		
@@ -122,14 +136,15 @@ public class gradeManagement extends JPanel{
 		//set the View-and-Edit button location
 		edit_jb.setSize(100, 30);
 		this.add(edit_jb);
-		jspring.putConstraint(SpringLayout.NORTH, edit_jb, 0, SpringLayout.SOUTH, grid_jp);
-		jspring.putConstraint(SpringLayout.WEST, edit_jb, 350, SpringLayout.WEST, this);
+		jspring.putConstraint(SpringLayout.NORTH, edit_jb, 0, SpringLayout.SOUTH, jsp);
+		jspring.putConstraint(SpringLayout.WEST, edit_jb, 370, SpringLayout.WEST, this);
 		
 	}
 	
 	public void addListener(){
 		edit_jb.addActionListener(new myActionListener());
 		search_jb.addActionListener(new myActionListener());
+		search_tf.addFocusListener(new myFocusListener());
 		coll_jcb.addItemListener(new itemListener());
 		dept_jcb.addItemListener(new itemListener());
 		major_jcb.addItemListener(new itemListener());
@@ -177,6 +192,21 @@ public class gradeManagement extends JPanel{
 
 			   updateTable();
 		   } 
+		}
+	}
+	//set search-textField action
+	private class myFocusListener implements FocusListener{
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			// TODO Auto-generated method stub
+		        search_tf.setText("");
+		}
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	//View-and-Edit window
@@ -305,7 +335,7 @@ public class gradeManagement extends JPanel{
 	}
 	
 		//initialize table header and data
-		public void initialTable(String coll, String dept, String major, String prof, String wday, String timepart)
+		public void initialTable()
 		{   //initialize table head
 			v_head.add("Course ID");v_head.add("Course Name");v_head.add("Instructor");
 			v_head.add("Credits");v_head.add("Average Score");
@@ -315,10 +345,11 @@ public class gradeManagement extends JPanel{
 		//update table data
 		public void updateTable(){
 			try{//initialize table
-				String sql="select grade.courseID, grade.courseName, grade.instructor,"+
-				           "grade.credit, avg(grade.score) from grade where grade.score>-1 "
+
+				String sql="select distinct grade.courseID, grade.courseName, grade.instructor,"+
+				           "grade.credit from grade,course,courseinfo "
+				           + "where course.courseID=grade.courseID and courseinfo.courseID=grade.courseID "
 						+ getSQL_college() + getSQL_dept() + getSQL_major() + getSQL_prof() ;
-				          								  
 				conn.rs=conn.stmt.executeQuery(sql);
 				v_data.clear();
 				while(conn.rs.next()){
@@ -327,8 +358,10 @@ public class gradeManagement extends JPanel{
 					String courseName=conn.rs.getString(2);
 					String instructor=conn.rs.getString(3);
 					String credit=conn.rs.getString(4);
-					String AvgScore=conn.rs.getString(5);
-					
+					sql = "select avg(grade.score) from grade where courseID='"+courseID+"'";
+					conn.rs2 = conn.stmt2.executeQuery(sql);
+					conn.rs2.next();
+					String AvgScore=conn.rs2.getString(1);
 					v.add(courseID);v.add(courseName);v.add(instructor);v.add(credit);v.add(AvgScore);
 					v_data.add(v);
 				}
@@ -343,7 +376,8 @@ public class gradeManagement extends JPanel{
 		public void updateTable(String courseId){
 			try{//initialize table
 				String sql="select grade.courseID, grade.courseName, grade.instructor,"+
-				           "grade.credit, avg(grade.score) from grade where grade.courseID='"+courseId+"'" ;        								  
+				           "grade.credit, avg(grade.score) from grade "
+				           + " where grade.courseID='"+courseId+"'" ;        								  
 				conn.rs=conn.stmt.executeQuery(sql);
 				v_data.clear();
 				while(conn.rs.next()){
