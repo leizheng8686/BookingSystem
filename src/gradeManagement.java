@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+
 public class gradeManagement extends JPanel{
 	
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -58,7 +59,7 @@ public class gradeManagement extends JPanel{
 	    public boolean isCellEditable(int row, int column) { 
 		   return false;
 	    }
-   }
+    }
 	
 	public gradeManagement(){
 		jspring = new SpringLayout();
@@ -84,18 +85,19 @@ public class gradeManagement extends JPanel{
 		this.setLayout(jspring);
 		this.setVisible(true);
 		//this.setSize(800,600);
-		this.setBackground(Color.WHITE);
+		this.setBackground(new Color(255,250,240));
 		//search area
 		search_jp = new JPanel(new FlowLayout(0,10,10));
 		search_jp.setSize(400,30);
+		search_jp.setBackground(new Color(255,250,240));
 		courseid.setSize(80,30);
-		search_tf.setSize(100,40);
+		search_tf.setSize(100,30);
 		search_jb.setSize(60, 30);
 		search_jp.add(courseid);
 		search_jp.add(search_tf);
 		search_jp.add(search_jb);
 		//options area
-		grid_jp = new JPanel(new GridLayout(3,1,5,5));
+		grid_jp = new JPanel(new GridLayout(2,1,5,5));
 		grid_jp.setBackground(Color.WHITE);
 		JPanel coll_dept = new JPanel(new GridLayout(1,4,10,0));
 		coll_dept.add(coll);
@@ -109,7 +111,6 @@ public class gradeManagement extends JPanel{
 		major_prof.add(prof);
 		major_prof.add(prof_jcb);
 		grid_jp.add(major_prof);
-		grid_jp.add(new JLabel());
 		//set the search area location
 		this.add(search_jp);
 		jspring.putConstraint(SpringLayout.NORTH, search_jp, 10, SpringLayout.NORTH, this);
@@ -155,10 +156,14 @@ public class gradeManagement extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			if(e.getSource() == edit_jb){
-				if(isSelected())
-					new makeEditWin();
+				if(isSelected()){
+					try{
+						String courseID = (String)(jt.getValueAt(jt.getSelectedRow(), 0));
+						String courseName = (String)(jt.getValueAt(jt.getSelectedRow(), 1));
+						new makeEditWin(courseID, courseName);
+					}catch(Exception E){E.printStackTrace();}
+				}
 			}
 			if(e.getSource() == search_jb){
 					try{
@@ -170,7 +175,7 @@ public class gradeManagement extends JPanel{
 						}
 						else
 						{//failed
-							JOptionPane.showMessageDialog(getParent(),"Not Available! No student took this course(ID:"+courseID+").","Error",
+							JOptionPane.showMessageDialog(getParent(),"Not found! Please make sure the course exists.","Error",
 							                                 JOptionPane.ERROR_MESSAGE);
 							
 						}
@@ -199,19 +204,149 @@ public class gradeManagement extends JPanel{
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
 		        search_tf.setText("");
 		}
 
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 	}
 	//View-and-Edit window
 	public class makeEditWin{
 		
+		private String courseID, courseName;
+		private JFrame jframe;
+		private Container c;
+		private SpringLayout slayout;
+		private JPanel jp;
+		private JScrollPane grade_jsp;
+		private int centerX=screenSize.width/2;
+		private int centerY=screenSize.height/2;
+
+		private JLabel label = new JLabel();
+		
+		private JButton confm = new JButton("Confirm");
+		
+		private JTable jt = new JTable();
+		//Vector for table header and content
+		private Vector<String> head_v=new Vector<String>();
+		private Vector<Vector> data_v=new Vector<Vector>();
+		
+		//define table model to make cells not editable but selectable
+		public class myTableModel extends DefaultTableModel{ 
+			public myTableModel(Vector<Vector> v_data, Vector<String> v_head)
+			{
+				super(v_data, v_head);
+			}
+		    public boolean isCellEditable(int row, int column) { 
+		    	if(column == 1)
+		    		return true;
+			    return false;
+		    }
+	   }
+		
+		public makeEditWin(String courseID, String courseName){
+			jframe = new JFrame("Student Score");
+			this.courseID = courseID;
+			this.courseName = courseName;
+			c = jframe.getContentPane();
+			jframe.setVisible(true);
+			jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			jframe.setLocation(centerX-width/2,centerY-height/2-100);
+			jframe.setSize(new Dimension(400,600));
+			//main panel
+			slayout = new SpringLayout();
+			jp = new JPanel(slayout);
+			jp.setBackground(new Color(255,250,240));
+			c.add(jp);
+			//set course-info label
+			label.setText(courseID+" - "+courseName);
+			label.setSize(200,30);
+			jp.add(label);
+			slayout.putConstraint(SpringLayout.NORTH, label, 5, SpringLayout.NORTH, jp);
+			slayout.putConstraint(SpringLayout.WEST, label, 10, SpringLayout.WEST, jp);
+			//set grade table
+			initialGradeTable();
+			myTableModel tm = new myTableModel(data_v,head_v);
+			jt.setModel(tm);// create JTable for course info
+			jt.setEditingColumn(1);
+			grade_jsp = new JScrollPane(jt);//put JTable in JScrollPane
+			grade_jsp.setPreferredSize(new Dimension(380,480));
+			grade_jsp.setBackground(Color.WHITE);
+			
+			jp.add(grade_jsp);
+			slayout.putConstraint(SpringLayout.NORTH, grade_jsp, 5, SpringLayout.SOUTH, label);
+			slayout.putConstraint(SpringLayout.WEST, grade_jsp, 10, SpringLayout.WEST, jp);
+			slayout.putConstraint(SpringLayout.EAST, jp, 10, SpringLayout.EAST, grade_jsp);
+			slayout.putConstraint(SpringLayout.SOUTH, grade_jsp, -50, SpringLayout.SOUTH, jp);
+
+			//add confirm button
+			confm.setSize(100, 30);
+			jp.add(confm);	
+			slayout.putConstraint(SpringLayout.NORTH, confm, 5, SpringLayout.SOUTH, grade_jsp);
+			slayout.putConstraint(SpringLayout.WEST, confm, 150, SpringLayout.WEST, jp);
+			slayout.putConstraint(SpringLayout.SOUTH, confm, -10, SpringLayout.SOUTH, jp);
+			confm.addActionListener(new mylistener());
+		}
+		
+		public void initialGradeTable(){
+			head_v.add("Student ID");head_v.add("Score");
+
+			try{//initialize table
+				String sql="select stuID, score from grade where courseID='"+courseID+"'";
+				conn.rs=conn.stmt.executeQuery(sql);
+				while(conn.rs.next()){
+					Vector v = new Vector();
+					String stuID = conn.rs.getString(1);
+					String score = conn.rs.getString(2);
+					v.add(stuID);v.add(score);
+					data_v.add(v);
+				}
+				MyTableModel tm = new MyTableModel(data_v,head_v);
+				jt.setModel(tm);
+			}
+			catch(Exception e){e.printStackTrace();}
+			finally{try{conn.rs.close();}catch(Exception E){}}
+		}
+		
+		class mylistener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println(jt.getRowCount());
+				int i = 0;
+				for(int x=0;x<jt.getRowCount();x++){
+					try{
+					String stuID = (String)(jt.getValueAt(x, 0));
+					String score = (String)(jt.getValueAt(x, 1));
+					System.out.println(stuID);
+					System.out.println(score);
+					String sql = "update grade set score='"+score+"' where stuID='"+stuID
+							+"' and courseID='"+courseID+"'";
+					System.out.println(sql);
+					i = conn.stmt.executeUpdate(sql);
+					System.out.println((String)(jt.getValueAt(0, 1)));
+					
+					}catch(Exception E){E.printStackTrace();}
+					finally{try{conn.rs.close();}catch(Exception E){}}
+				}
+				if(i!=0)
+				{//successful
+					JOptionPane.showMessageDialog(jframe,"Updated!","Successful",
+					                            JOptionPane.INFORMATION_MESSAGE);
+					updateTable();
+					jframe.dispose();
+				}
+				else
+				{//failed
+					JOptionPane.showMessageDialog(jframe,"Failed to update! Please try again.","Error",
+					                                 JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			
+		}
 	}
 	
 	//initialize college items

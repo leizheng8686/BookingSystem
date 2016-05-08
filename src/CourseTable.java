@@ -11,7 +11,9 @@ public class CourseTable extends JPanel{
 	private String stuID;
 	private GetStuInfo getsi;
 	private connectDB conn = new connectDB();
-	
+	//table rows and cols
+	private int rows = 5;
+	private int cols = 8;
 	public CourseTable(String stuID){
 		this.stuID = stuID;
 		getsi=new GetStuInfo(host);
@@ -24,8 +26,7 @@ public class CourseTable extends JPanel{
 		this.setLayout(table_jsl);
 		this.setBackground(Color.WHITE);
 		
-		int rows = 5;
-		int cols = 8;
+		
 		for (int r = 0; r < rows; r++) {
 		    for (int c = 0; c < cols; c++) {
 		        JTextField textField =
@@ -98,15 +99,21 @@ public class CourseTable extends JPanel{
 	}
 	public void updateCourseTable(){
 		try{
-			String sql = "select courseName,courseDay, courseTime from course,courseinfo,grade "
+			String sql = "select course.courseName,courseDay, courseTime from course,courseinfo,grade "
 					+ " where course.courseID=courseinfo.courseID and courseinfo.courseID=grade.courseID and grade.score=0 and grade.StuID='"
 					+ stuID +"'";
 			conn.rs = conn.stmt.executeQuery(sql);
+			for (int r = 1; r < rows; r++) {
+			    for (int c = 1; c < cols; c++) {
+			    	JTextField j = (JTextField)(this.getComponent(r*cols+c));
+					j.setText("");
+			    }
+			}
 			while(conn.rs.next()){
 				String courseName = conn.rs.getString(1);
 				int courseDay = conn.rs.getInt(2);
 				int courseTime = conn.rs.getInt(3);
-				JTextField j = (JTextField)(this.getComponent(courseTime*8+courseDay));
+				JTextField j = (JTextField)(this.getComponent(courseTime*cols+courseDay));
 				j.setText(courseName);
 			}
 		}catch(Exception e){e.printStackTrace();}

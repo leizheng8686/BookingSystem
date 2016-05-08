@@ -102,9 +102,6 @@ public class StuClient extends JFrame implements ActionListener{
 	}
 	
 	
-	public static void main(String[] arg){
-		new StuClient("10411379");
-	}
 
 	public class myChangeListener  implements ChangeListener{
 		@Override
@@ -123,5 +120,9 @@ public class StuClient extends JFrame implements ActionListener{
 			new ChangePwd(this.stuID);
 		}
 		
+	}
+
+	public static void main(String[] arg){
+		new StuClient("10399614");
 	}
 }

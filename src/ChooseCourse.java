@@ -79,7 +79,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		this.initialCombox_prof();
 		this.initialCombox_weekday();
 		this.initialCombox_timepart();
-		this.initialTable("","","","","","");//initialize table data
+		this.initialTable();//initialize table data
 
 	}
 	
@@ -304,7 +304,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 	}
 	
 	//initialize table data
-	public void initialTable(String coll, String dept, String major, String prof, String wday, String timepart)
+	public void initialTable()
 	{   //initialize table head
 		v_head.add("College");v_head.add("Major");v_head.add("Course ID");v_head.add("Course Name");
 		v_head.add("Weekday");v_head.add("Time");v_head.add("Location");v_head.add("Instructor");
@@ -362,7 +362,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		catch(Exception e){e.printStackTrace();}
 	}
 	public void updateTable(){
-		try{//initialize table
+		try{//update table
 			String sql="select college.collName, major.majorName, courseinfo.courseID, course.courseName, "+
 			           "courseinfo.courseDay, courseinfo.courseTime, courseinfo.location, courseinfo.teacher, "+
 			           "course.credit, courseinfo.restCapacity from course,courseinfo,college,major where "+
