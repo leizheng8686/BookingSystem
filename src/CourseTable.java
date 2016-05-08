@@ -32,7 +32,7 @@ public class CourseTable extends JPanel{
 		        JTextField textField =
 		                new JTextField(" ");
 		        textField.setEditable(false);
-		        textField.setBackground(new Color(0, 206, 209));
+		        textField.setBackground(new Color(255,250,240));
 		        textField.setHorizontalAlignment(JTextField.CENTER );
 		        this.add(textField);
 		    }
