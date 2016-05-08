@@ -6,7 +6,7 @@ import javax.swing.event.ChangeListener;
 import java.net.URL;
 
 //student client window
-public class StuClient extends JFrame{
+public class StuClient extends JFrame implements ActionListener{
 	
 	private String host;
 	private String stuID;
@@ -36,7 +36,7 @@ public class StuClient extends JFrame{
 	// Menu and items
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu = new JMenu("Menu");
-	private JMenuItem setting = new JMenuItem("Setting");
+	private JMenuItem setting = new JMenuItem("ChangePwd");
 	private JMenuItem signout = new JMenuItem("Sign Out");
 	
 	public StuClient(String stuID){
@@ -53,9 +53,9 @@ public class StuClient extends JFrame{
 		this.stuID = stuID;
 
 		stuInfo_jp = new StuInfo(this.stuID,host);
-		courseTable_jp = new CourseTable(stuID);
-		addCourse_jp = new ChooseCourse(stuID);
-		//dropCourse_jp = new DropCourse(this.stuID,host);
+		courseTable_jp = new CourseTable(this.stuID);
+		addCourse_jp = new ChooseCourse(this.stuID);
+		dropCourse_jp = new DropCourse(this.stuID);
 		grades_jp = new StuGrades();
 		//initialize frame
 		setMenu();
@@ -82,10 +82,13 @@ public class StuClient extends JFrame{
 		c.add(tabbedPane_main);
 		
 	}
-	
+	public String getstuID(){
+		return this.stuID;
+	}
 	public void addListener(){
 		//Menu items
-		setting.addActionListener(new menuActionListener());
+		setting.addActionListener(this);
+			
 		signout.addActionListener(new menuActionListener());
 		tabbedPane_main.addChangeListener(new myChangeListener());
 		
@@ -100,7 +103,7 @@ public class StuClient extends JFrame{
 	
 	
 	public static void main(String[] arg){
-		new StuClient("10399614");
+		new StuClient("10411379");
 	}
 
 	public class myChangeListener  implements ChangeListener{
@@ -108,6 +111,17 @@ public class StuClient extends JFrame{
 		public void stateChanged(ChangeEvent e) {
 			// TODO Auto-generated method stub
 			courseTable_jp.updateCourseTable();
+			addCourse_jp.updateTable();
+			dropCourse_jp.updateTable();
 		}
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==setting){
+			new ChangePwd(this.stuID);
+		}
+		
 	}
 }

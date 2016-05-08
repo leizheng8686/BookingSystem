@@ -13,8 +13,8 @@ public class CourseTable extends JPanel{
 	private connectDB conn = new connectDB();
 	
 	public CourseTable(String stuID){
-		getsi=new GetStuInfo(host);
 		this.stuID = stuID;
+		getsi=new GetStuInfo(host);
 		makePanel();
 		updateCourseTable();
 	}
@@ -98,7 +98,7 @@ public class CourseTable extends JPanel{
 	}
 	public void updateCourseTable(){
 		try{
-			String sql = "select course.courseName,courseDay, courseTime from course,courseinfo,grade "
+			String sql = "select courseName,courseDay, courseTime from course,courseinfo,grade "
 					+ " where course.courseID=courseinfo.courseID and courseinfo.courseID=grade.courseID and grade.score=0 and grade.StuID='"
 					+ stuID +"'";
 			conn.rs = conn.stmt.executeQuery(sql);

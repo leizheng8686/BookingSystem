@@ -183,7 +183,7 @@ public class loginWindow extends JFrame implements ActionListener{
 		try
 		{//load JDBC driver, make Connection and Statement
 			Class.forName("com.mysql.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mysql://localhost"+"/courseBooking","root","");
+			conn=DriverManager.getConnection("jdbc:mysql://localhost"+"/courseBooking","root","123");
 			stmt=conn.createStatement();
 		}
 		catch(SQLException e)
