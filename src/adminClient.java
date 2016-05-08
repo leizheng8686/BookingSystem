@@ -5,7 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 //administration client window
-public class adminClient extends JFrame{
+public class adminClient extends JFrame implements ActionListener{
 	private String host;
 	private String adminID;
 	private String stuID;
@@ -35,7 +35,7 @@ public class adminClient extends JFrame{
 	// Menu and items
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu = new JMenu("Menu");
-	private JMenuItem setting = new JMenuItem("Setting");
+	private JMenuItem setting = new JMenuItem("ChangePwd");
 	private JMenuItem signout = new JMenuItem("Sign Out");
 	
 	public adminClient(String adminID){
@@ -83,7 +83,7 @@ public class adminClient extends JFrame{
 	
 	public void addListener(){
 		//Menu items
-		setting.addActionListener(new menuActionListener());
+		setting.addActionListener(this);
 		signout.addActionListener(new menuActionListener());
 		
 		
@@ -102,7 +102,12 @@ public class adminClient extends JFrame{
 			courseTable_jp.updateCourseTable();
 		}
 	}
-	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==setting){
+			new ChangePwdTea(this.adminID);
+		}
+		
+	}
 	public static void main(String[] arg){
 		new adminClient("Lei");
 	}
