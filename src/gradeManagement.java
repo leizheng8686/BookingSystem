@@ -28,7 +28,7 @@ public class gradeManagement extends JPanel{
 	private JLabel dept = new JLabel("Department : ");
 	private JLabel major = new JLabel("Major : ");
 	private JLabel prof = new JLabel("Professor : ");
-	private JLabel courseid = new JLabel("Coure ID: ");
+	private JLabel courseid = new JLabel("Course ID: ");
 	//JTextField
 	private JTextField search_tf = new JTextField("Please type a course ID");
 	//JComboBoxes
@@ -87,12 +87,13 @@ public class gradeManagement extends JPanel{
 		//this.setSize(800,600);
 		this.setBackground(new Color(255,250,240));
 		//search area
-		search_jp = new JPanel(new FlowLayout(0,10,10));
-		search_jp.setSize(400,30);
+		search_jp = new JPanel(null);
+		search_jp.setVisible(true);
+		search_jp.setPreferredSize(new Dimension(400,30));
 		search_jp.setBackground(new Color(255,250,240));
-		courseid.setSize(80,30);
-		search_tf.setSize(100,30);
-		search_jb.setSize(60, 30);
+		courseid.setBounds(0,0,65,30);
+		search_tf.setBounds(65,0,180,30);
+		search_jb.setBounds(280,0,80, 30);
 		search_jp.add(courseid);
 		search_jp.add(search_tf);
 		search_jp.add(search_jb);
