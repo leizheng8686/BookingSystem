@@ -40,6 +40,7 @@ public class adminClient extends JFrame implements ActionListener{
 		//initialize window title and size
 		super("SIT Course System Client for Administrator");
 		setVisible(true);
+		addListener();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int centerX=screenSize.width/2;
 		int centerY=screenSize.height/2;
