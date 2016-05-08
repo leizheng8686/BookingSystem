@@ -56,7 +56,7 @@ public class StuClient extends JFrame implements ActionListener{
 		courseTable_jp = new CourseTable(this.stuID);
 		addCourse_jp = new ChooseCourse(this.stuID);
 		dropCourse_jp = new DropCourse(this.stuID);
-		grades_jp = new StuGrades();
+		grades_jp = new StuGrades(this.stuID);
 		//initialize frame
 		setMenu();
 		setMainFrame();
