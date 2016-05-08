@@ -36,7 +36,7 @@ public class StuClient extends JFrame implements ActionListener{
 	// Menu and items
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu = new JMenu("Menu");
-	private JMenuItem setting = new JMenuItem("Setting");
+	private JMenuItem setting = new JMenuItem("ChangePwd");
 	private JMenuItem signout = new JMenuItem("Sign Out");
 	
 	public StuClient(String stuID){
