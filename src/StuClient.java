@@ -97,7 +97,8 @@ public class StuClient extends JFrame implements ActionListener{
 	
 	public class menuActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
+			dispose();//close student client window
+			new loginWindow();
 		}
 	}
 	

@@ -19,7 +19,7 @@ public class adminClient extends JFrame implements ActionListener{
 	// TabbedPane and items
 	private JTabbedPane tabbedPane_main = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT);
 	//private JTextArea ta = new JTextArea(20,30);
-	private StuInfo stuInfo_jp;
+	private studentManagement stuM_jp;
 	private courseManagement courseM_jp;
 	private gradeManagement gradeM_jp;
 	//private JScrollPane courseTable_jsp = new JScrollPane();
@@ -51,9 +51,8 @@ public class adminClient extends JFrame implements ActionListener{
 		this.adminID = adminID;
 
 		//create new panels
-		stuInfo_jp = new StuInfo(this.stuID,host);
+		stuM_jp = new studentManagement();
 		courseM_jp = new courseManagement();
-		//dropCourse_jp = new DropCourse(this.stuID,host);
 		gradeM_jp = new gradeManagement();
 		//initialize frame
 		setMenu();
@@ -69,7 +68,7 @@ public class adminClient extends JFrame implements ActionListener{
 	}
 	
 	private void setMainFrame(){
-		tabbedPane_main.addTab(" Student Management  ", stuInfo_jp);
+		tabbedPane_main.addTab(" Student Management  ", stuM_jp);
 		tabbedPane_main.addTab("  Course Management  ", courseM_jp);
 		tabbedPane_main.addTab("  Grades Management  ", gradeM_jp);
 
@@ -87,7 +86,8 @@ public class adminClient extends JFrame implements ActionListener{
 	
 	public class menuActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
+			dispose();//close admin client window
+			new loginWindow();
 		}
 	}
 	

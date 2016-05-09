@@ -49,7 +49,7 @@ public class DropCourse extends JPanel implements ActionListener{
 		jspring = new SpringLayout();
 		this.setLayout(jspring);
 		this.setVisible(true);
-		this.setBackground(Color.white);
+		this.setBackground(new Color(255,250,240));
 		this.add(currentCourses);
 		jspring.putConstraint(SpringLayout.NORTH, currentCourses, 20, SpringLayout.NORTH, this);
 		jspring.putConstraint(SpringLayout.WEST, currentCourses, 20, SpringLayout.WEST, this);

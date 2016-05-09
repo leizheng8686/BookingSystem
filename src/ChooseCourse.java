@@ -91,7 +91,7 @@ public class ChooseCourse extends JPanel implements ActionListener{
 		this.setLayout(jspring);
 		this.setVisible(true);
 		//this.setSize(800,600);
-		this.setBackground(Color.WHITE);
+		this.setBackground(new Color(255,250,240));
 		uppart = new JPanel(new GridLayout(5,1,5,5));
 //		jsplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,uppart,downpart);
 //		jsplit.setDividerLocation(100);

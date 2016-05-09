@@ -42,6 +42,7 @@ public class StuInfo extends JPanel implements ActionListener{
 	{	String[] baseinfo=getsi.getBaseInfo(this.stu_id);
 		//System.out.println("The stuid in StuInfo is "+this.stu_id);
 		this.setLayout(null);
+		this.setBackground(new Color(255,250,240));
 		for(int i=0;i<15;i++){
 			jlArray[i].setBounds(60,20+i*35,120,20);
 			jlArray[i].setFont(new Font("Serif",Font.BOLD,14));
@@ -61,10 +62,10 @@ public class StuInfo extends JPanel implements ActionListener{
 			this.add(jtArray[i]);
 		}
 		for(int i=0;i<3;i++){
-			jbArray[i].setBounds(360, 440+i*35, 60, 20);
+			jbArray[i].setBounds(360, 440+i*35, 100, 20);
 			this.add(jbArray[i]);
 		}
-		jbArray[3].setBounds(200, 560, 60, 20);
+		jbArray[3].setBounds(360, 560, 100, 30);
 		this.add(jbArray[3]);
 		jbArray[3].setVisible(false);
 		//this.setTitle("Student Information");
