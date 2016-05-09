@@ -82,7 +82,7 @@ public class DropCourse extends JPanel implements ActionListener{
 			           "courseinfo.courseDay, courseinfo.courseTime, courseinfo.location, courseinfo.teacher, "+
 			           "course.credit, courseinfo.restCapacity from grade,course,courseinfo,college,major where "+
 			           "grade.courseID=courseinfo.courseID and grade.courseID=course.courseID and course.majorID=major.majorID and "+
-			           "course.collID=college.collID";
+			           "course.collID=college.collID and stuID='"+stuID+"'";
 			System.out.println(sql);
 			conn.rs=conn.stmt.executeQuery(sql);
 			while(conn.rs.next()){
@@ -137,7 +137,7 @@ public class DropCourse extends JPanel implements ActionListener{
 			           "courseinfo.courseDay, courseinfo.courseTime, courseinfo.location, courseinfo.teacher, "+
 			           "course.credit, courseinfo.restCapacity from grade,course,courseinfo,college,major where "+
 			           "grade.courseID=courseinfo.courseID and grade.courseID=course.courseID and course.majorID=major.majorID and "+
-			           "course.collID=college.collID";
+			           "course.collID=college.collID and stuID='"+stuID+"'";
 			conn.rs=conn.stmt.executeQuery(sql);
 			v_data.clear();
 			while(conn.rs.next()){

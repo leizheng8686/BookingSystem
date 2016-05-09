@@ -111,6 +111,7 @@ public class StuClient extends JFrame implements ActionListener{
 			courseTable_jp.updateCourseTable();
 			addCourse_jp.updateTable();
 			dropCourse_jp.updateTable();
+			grades_jp.updateTable();
 		}
 	}
 

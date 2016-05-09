@@ -230,14 +230,21 @@ public class courseManagement extends JPanel{
 					String []data = editwin.getTextContent();
 					if(data[10].trim().equals(""))
 						data[10] = "30";
+					else
+						data[10] = editwin.textField[10].getText();
 					if(data[11].trim().equals(""))
 						data[11] = "30";
+					else
+						data[11] = editwin.textField[11].getText();
 					if(data[12].trim().equals(""))
 						data[12] = "Sorry, there is no introdution this moment.";
+					else
+						data[12] = (String)(editwin.intro_ta.getText());
 					String sql = "update course,courseinfo set teacher='"+data[5]+"', credit='"+data[6]
 							+"', location='"+data[7]+"', courseDay='"+data[8]+"', courseTime='"+data[9]
 							+"', capacity='"+data[10]+"', restCapacity='"+data[11]+"',description='"+data[12]
 							+ "' where course.courseID='"+courseID+"' and courseinfo.courseID='"+courseID+"'";
+					System.out.println(sql);
 					int i=conn.stmt.executeUpdate(sql);
 					if(i!=0)
 					{//successful
@@ -279,8 +286,7 @@ public class courseManagement extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				try{//insert into students (name, sex, age) values("孙丽华", "女", 21);
-					//courseName,course.courseID,collID,deptID,majorID,teacher,credit,location,courseDay,courseTime,capacity,restCapacity,description
+				try{
 					String []data = addwin.getTextContent();
 					if(data[10].trim().equals(""))
 						data[10] = "30";
@@ -299,15 +305,16 @@ public class courseManagement extends JPanel{
 						sql = "insert into course value('"+data[1]+"', '"+data[0]+"', '"+data[6]+"', '"+data[2]+"', '"+data[3]+"', '"+data[4]+"')";
 						System.out.println(sql);
 						int i = conn.stmt.executeUpdate(sql);
-						if(i==1)
+						if(i==0)
 						{//failed
 							JOptionPane.showMessageDialog(addwin,"Failed to add! Please try again.","Error",
 							                                 JOptionPane.ERROR_MESSAGE);
+							return;
 						}
 						sql = "insert into courseinfo value('"+data[1]+"', '"+data[8]+"', '"+data[9]+"', '"
 								+data[7]+"', '"+data[5]+"', '"+data[10]+"', '"+data[11]+"', '"+data[12]+"')";
 						System.out.println(sql);
-						conn.stmt.executeUpdate(sql);
+						//conn.stmt.executeUpdate(sql);
 						i=conn.stmt.executeUpdate(sql);
 						if(i!=0)
 						{//successful

@@ -488,7 +488,7 @@ public class StuGrades extends JPanel{
 
 				String sql="select distinct grade.courseID, grade.courseName, grade.instructor,"+
 				           "grade.credit from grade,course,courseinfo "
-				           + "where course.courseID=grade.courseID and courseinfo.courseID=grade.courseID "
+				           + "where course.courseID=grade.courseID and courseinfo.courseID=grade.courseID and stuID='"+stuID+"'"
 						+ getSQL_college() + getSQL_dept() + getSQL_major() + getSQL_prof() ;
 				conn.rs=conn.stmt.executeQuery(sql);
 				v_data.clear();
@@ -517,7 +517,7 @@ public class StuGrades extends JPanel{
 			try{//initialize table
 				String sql="select grade.courseID, grade.courseName, grade.instructor,"+
 				           "grade.credit, grade.score from grade "
-				           + " where grade.courseID='"+courseId+"'" ;        								  
+				           + " where grade.courseID='"+courseId+"' and stuID='"+stuID+"'";        								  
 				conn.rs=conn.stmt.executeQuery(sql);
 				v_data.clear();
 				while(conn.rs.next()){

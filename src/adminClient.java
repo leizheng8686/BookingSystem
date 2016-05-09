@@ -68,9 +68,9 @@ public class adminClient extends JFrame implements ActionListener{
 	}
 	
 	private void setMainFrame(){
-		tabbedPane_main.addTab(" Student Management  ", stuM_jp);
 		tabbedPane_main.addTab("  Course Management  ", courseM_jp);
 		tabbedPane_main.addTab("  Grades Management  ", gradeM_jp);
+		tabbedPane_main.addTab(" Student Management  ", stuM_jp);
 
 		c.add(tabbedPane_main);
 		
