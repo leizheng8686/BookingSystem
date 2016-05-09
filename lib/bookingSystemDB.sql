@@ -99,21 +99,26 @@ insert into dept values('0103','01','Civil, Environmental & Ocean Engineering');
 insert into dept values('0104','01','Electrical & Computer Engineering');
 insert into dept values('0105','01','Mathematical Sciences');
 insert into dept values('0106','01','Physics & Engineering Physics');
+insert into dept values('0201','02','School of Business');
 
 insert into major values('010401', '0104', '01','Electrical Engineering');
 insert into major values('010402', '0104', '01','Computer Engineering');
 insert into major values('010403', '0104', '01','Information and Data Engineering');
 insert into major values('010101', '0101', '01','Computer Science');
+insert into major values('020101', '0201', '02','MBA/Executive MBA');
+insert into major values('020102', '0201', '02','Business Intelligence & Analytics');
+insert into major values('020103', '0201', '02','Enterprise Project Management');
+insert into major values('020104', '0201', '02','Finance');
+insert into major values('020105', '0201', '02','Information Systems');
 
 insert into student values('10399614','Lei', '', 'Zheng', 'Male','1999-9-9','China','01','0104','010402','2015-9-1', '2017-5-15','leizheng8686@gmail.com','Jersey City','123456789');
 insert into student values('10411379','Shengkai', '', 'Yu', 'Male','1992-10-25','China','01','0104','010402','2015-9-1','2017-5-15','ysk1@163.com','newport****','201****');
+insert into student values('12345678','Barack', 'Hussein', 'Obama', 'Male','1961-8-4','USA','02','0201','020104','2015-9-1','2017-5-15','obama@gmail.com','Washington DC','2024561414');
+
 
 insert into user_stu values('10399614','10399614');
 insert into user_stu values('10411379','10411379');
-
-#insert into user_stu values('200501030218','200501030218');
-#insert into user_stu values('200501020319','200501020319');
-#insert into user_stu values('200502020319','200502020319');
+insert into user_stu values('12345678','12345678');
 
 insert into user_admin values('Lei','123456');
 insert into user_admin values('Shengkai','123456');
@@ -125,6 +130,10 @@ insert into course values('CPE695','Applied Machine Learning', 3.0,'01','0104', 
 insert into course values('CS561B','Database Management Systems I', 3.0,'01','0101', '010101');
 insert into course values('CS555','Agile Methods for Software Developement', 3.0,'01','0101', '010101');
 insert into course values('EE810P','Engineering Programming: Python', 3.0,'01','0104', '010401');
+insert into course values('FIN510A','Financial Statement Analysis', 3.0,'02','0201', '020104');
+insert into course values('FIN530A','Investment Banking', 3.0,'02','0201', '020104');
+insert into course values('FIN545A','Risk Mangt for Fincl Cybersecrty', 3.0,'02','0201', '020104');
+insert into course values('FIN615A','Financial Decision Making', 3.0,'02','0201', '020104');
 
 insert into courseinfo values('EE810J','1','3','X106', 'Dov Kruger', 30, 30, 'Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere" (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of computer architecture.');
 insert into courseinfo values('EE810C','3','3','EE715', 'Dov Kruger ', 30, 30, 'Hello, I am an introduction.');
@@ -133,4 +142,8 @@ insert into courseinfo values('CPE695','3','4','BC210', 'Duan', 30, 30, 'Hello, 
 insert into courseinfo values('CS561B','4','4','E222', 'Kim Samuel', 30, 30, 'Hello, I am Database Management Systems I.');
 insert into courseinfo values('CS555','3','3','BC304', 'Rowland James', 30, 30, 'Hello, I am Agile Methods for Software Developement.');
 insert into courseinfo values('EE810P','5','1','BC107', 'Mukundan Iyengar', 30, 30, 'Hello, I am Engineering Programming: Python.');
+insert into courseinfo values('FIN510A','2','3','BC122', 'Liu F', 35, 35, 'Hello, I am Financial Statement Analysis.');
+insert into courseinfo values('FIN530A','4','4','BC205', 'Katsikiotis V', 35, 35, 'Hello, I am Investment Banking');
+insert into courseinfo values('FIN545A','1','4','BC317', 'Rohmeyer P', 35, 35, 'Hello, I am Risk Mangt for Fincl Cybersecrty.');
+insert into courseinfo values('FIN615A','1','3','BC302', 'Rohmeyer P', 35, 35, 'Hello, I am Risk Mangt for Fincl Cybersecrty.');
 

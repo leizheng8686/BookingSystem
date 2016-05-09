@@ -609,7 +609,8 @@ public class ChooseCourse extends JPanel implements ActionListener{
 				    conn.rs.close();
 				}
 				else{   //check course table to make sure there is no time conflict
-				    String sql2 = "select count(courseID) from grade where score = 0";
+				    String sql2 = "select count(courseID) from grade where score = 0 and stuID='"+stuID+"'" ;
+				    System.out.println(sql2);
 				    conn.rs=conn.stmt.executeQuery(sql2);
 				    conn.rs.next();
 				    if(conn.rs.getDouble(1) > 3){
