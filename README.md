@@ -16,7 +16,9 @@ The system is made using following Technologies:
 - MySQL - Database.  
   
 ##Setup  
-
+-Install Mysql
+-Initialize database with the sql file in lib folder
+-Run
 ##Product Show  
 ###Login-in Windows
 ![image](https://github.com/leizheng8686/BookingSystem/blob/master/lib/loginWindow.png)
